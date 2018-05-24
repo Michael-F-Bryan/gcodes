@@ -11,15 +11,15 @@ namespace Gcodes
         private readonly List<Token> tokens;
         private int index;
 
-        public Parser(IEnumerable<Token> tokens)
+        public Parser(List<Token> tokens)
         {
-            this.tokens = tokens.ToList() ?? throw new ArgumentNullException(nameof(tokens));
+            this.tokens = tokens ?? throw new ArgumentNullException(nameof(tokens));
             index = 0;
         }
 
         public bool Finished => index >= tokens.Count;
 
-        public Parser(string src) : this(new Lexer(src).Tokenize()) { }
+        public Parser(string src) : this(new Lexer(src).Tokenize().ToList()) { }
 
         /// <summary>
         /// Parse a single gcode.

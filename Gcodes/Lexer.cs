@@ -30,6 +30,8 @@ namespace Gcodes
                 new Pattern(@"\GY", TokenKind.Y),
                 new Pattern(@"\GZ", TokenKind.Z),
                 new Pattern(@"\GF", TokenKind.F),
+                new Pattern(@"\GI", TokenKind.I),
+                new Pattern(@"\GJ", TokenKind.J),
 
                 new Pattern(@"\G[-+]?(\d+\.\d+|\.\d+|\d+\.?)", TokenKind.Number),
             };

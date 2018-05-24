@@ -43,6 +43,8 @@ namespace Gcodes.Test
         [InlineData("Y", TokenKind.Y)]
         [InlineData("Z", TokenKind.Z)]
         [InlineData("F", TokenKind.F)]
+        [InlineData("I", TokenKind.I)]
+        [InlineData("J", TokenKind.J)]
         public void RecogniseStandardTokens(string src, TokenKind kind)
         {
             var lexer = new Lexer(src);

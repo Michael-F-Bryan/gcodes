@@ -13,6 +13,8 @@ namespace Gcodes.Tokens
         Z,
         F,
         N,
+        I,
+        J,
     }
 
     public static class TokenKindExt
