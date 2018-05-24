@@ -28,5 +28,7 @@ namespace Gcode
         Y,
         Integer,
         Float,
+        Z,
+        F,
     }
 }

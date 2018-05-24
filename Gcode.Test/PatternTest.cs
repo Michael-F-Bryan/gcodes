@@ -33,5 +33,15 @@ namespace Gcode.Test
             Assert.Equal(TokenKind.Integer, tok.Kind);
             Assert.Equal("123", tok.Value);
         }
+
+        [Fact]
+        public void NotMatched()
+        {
+            var src = "123";
+            var pat = new Pattern(@"\G[a-z]+", TokenKind.Integer);
+
+            Assert.False(pat.TryMatch(src, 0, out Token tok));
+            Assert.Null(tok);
+        }
     }
 }
