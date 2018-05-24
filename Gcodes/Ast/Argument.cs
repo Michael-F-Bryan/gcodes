@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Gcodes.Tokens;
+using System;
 using System.Collections.Generic;
 
-namespace Gcodes
+namespace Gcodes.Ast
 {
     public class Argument : IEquatable<Argument>
     {
