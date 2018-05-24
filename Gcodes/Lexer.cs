@@ -30,8 +30,7 @@ namespace Gcodes
                 new Pattern(@"\GZ", TokenKind.Z),
                 new Pattern(@"\GF", TokenKind.F),
 
-                new Pattern(@"\G-?\d+\.\d+", TokenKind.Float),
-                new Pattern(@"\G\d+", TokenKind.Integer),
+                new Pattern(@"\G[-+]?[0-9]*\.?[0-9]+", TokenKind.Number),
             };
         }
 

@@ -19,19 +19,19 @@ namespace Gcodes.Test
         [Fact]
         public void MustAlwaysMatchInputStart()
         {
-            Assert.Throws<ArgumentException>(() => new Pattern(@"\d+", TokenKind.Integer));
+            Assert.Throws<ArgumentException>(() => new Pattern(@"\d+", TokenKind.Number));
         }
 
         [Fact]
         public void MatchASimpleInteger()
         {
             var src = "123";
-            var pat = new Pattern(@"\G\d+", TokenKind.Integer);
+            var pat = new Pattern(@"\G\d+", TokenKind.Number);
 
             Assert.True(pat.TryMatch(src, 0, out Token tok));
 
             Assert.Equal(new Span(0, src.Length), tok.Span);
-            Assert.Equal(TokenKind.Integer, tok.Kind);
+            Assert.Equal(TokenKind.Number, tok.Kind);
             Assert.Equal("123", tok.Value);
         }
 
@@ -39,7 +39,7 @@ namespace Gcodes.Test
         public void NotMatched()
         {
             var src = "123";
-            var pat = new Pattern(@"\G[a-z]+", TokenKind.Integer);
+            var pat = new Pattern(@"\G[a-z]+", TokenKind.Number);
 
             Assert.False(pat.TryMatch(src, 0, out Token tok));
             Assert.Null(tok);
@@ -48,7 +48,7 @@ namespace Gcodes.Test
         [Fact]
         public void PatternIgnoreCase()
         {
-            var pat = new Pattern(@"\Gasd", TokenKind.Integer);
+            var pat = new Pattern(@"\Gasd", TokenKind.Number);
 
 
             Assert.True(pat.TryMatch("asd", 0, out Token tok));

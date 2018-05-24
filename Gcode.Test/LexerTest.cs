@@ -36,9 +36,10 @@ namespace Gcodes.Test
         }
 
         [Theory]
-        [InlineData("12", TokenKind.Integer)]
-        [InlineData("1.23", TokenKind.Float)]
-        [InlineData("-1.23", TokenKind.Float)]
+        [InlineData("12", TokenKind.Number)]
+        [InlineData("1.23", TokenKind.Number)]
+        [InlineData("-1.23", TokenKind.Number)]
+        [InlineData("-1.", TokenKind.Number)]
         [InlineData("G", TokenKind.G)]
         [InlineData("N", TokenKind.N)]
         [InlineData("M", TokenKind.M)]
@@ -79,11 +80,11 @@ namespace Gcodes.Test
             var shouldBe = new List<Token>
             {
                 new Token(new Span(0, 1), TokenKind.G),
-                new Token(new Span(1, 3), TokenKind.Integer, "10"),
+                new Token(new Span(1, 3), TokenKind.Number, "10"),
                 new Token(new Span(4, 5), TokenKind.X),
-                new Token(new Span(5, 9), TokenKind.Float, "50.0"),
+                new Token(new Span(5, 9), TokenKind.Number, "50.0"),
                 new Token(new Span(10, 11), TokenKind.Y),
-                new Token(new Span(11, 16), TokenKind.Float, "100.0"),
+                new Token(new Span(11, 16), TokenKind.Number, "100.0"),
             };
 
             var got = lexer.Tokenize().ToList();

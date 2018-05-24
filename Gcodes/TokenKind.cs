@@ -13,8 +13,7 @@ namespace Gcodes
         M,
         X,
         Y,
-        Integer,
-        Float,
+        Number,
         Z,
         F,
         N,
@@ -26,8 +25,7 @@ namespace Gcodes
         {
             switch (kind)
             {
-                case TokenKind.Integer:
-                case TokenKind.Float:
+                case TokenKind.Number:
                     return true;
                 default:
                     return false;

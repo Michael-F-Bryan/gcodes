@@ -40,7 +40,7 @@ namespace Gcodes
             var start = index;
 
             var g = Chomp(TokenKind.G);
-            var number = Chomp(TokenKind.Integer);
+            var number = Chomp(TokenKind.Number);
 
             if (g == null || number == null)
             {
@@ -55,9 +55,9 @@ namespace Gcodes
             var kindTok = Chomp(TokenKind.F, TokenKind.X, TokenKind.Y, TokenKind.Z);
             if (kindTok == null) return null;
 
-            var valueTok = Chomp(TokenKind.Float);
+            var valueTok = Chomp(TokenKind.Number);
             if (valueTok == null)
-                ThrowParseError(TokenKind.Float);
+                ThrowParseError(TokenKind.Number);
 
             var span = kindTok.Span.Merge(valueTok.Span);
             var value = double.Parse(valueTok.Value);
@@ -71,10 +71,15 @@ namespace Gcodes
             var n = Chomp(TokenKind.N);
             if (n == null) { return null; }
 
-            var number = Chomp(TokenKind.Integer);
+            var number = Chomp(TokenKind.Number);
             if (number == null)
             {
-                ThrowParseError(TokenKind.Integer);
+                ThrowParseError(TokenKind.Number);
+            }
+
+            if (number.Value.Contains('.') || number.Value.Contains("-"))
+            {
+                throw new ParseException("Line numbers must be positive integers");
             }
 
             return new LineNumber(int.Parse(number.Value), n.Span.Merge(number.Span));

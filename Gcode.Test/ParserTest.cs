@@ -35,6 +35,15 @@ namespace Gcodes.Test
         }
 
         [Theory]
+        [InlineData("N50.0")]
+        [InlineData("N-23")]
+        public void LineNumbersAreIntegers(string src)
+        {
+            var parser = new Parser(src);
+            Assert.Throws<ParseException>(() => parser.ParseLineNumber());
+        }
+
+        [Theory]
         [InlineData("X50", ArgumentKind.X, 50.0)]
         [InlineData("F-30.5", ArgumentKind.FeedRate, -30.5)]
         public void ParseAnArgument(string src, ArgumentKind kind, double value)
