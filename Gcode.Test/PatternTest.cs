@@ -1,10 +1,5 @@
-﻿using Gcodes;
-using Gcodes.Tokens;
+﻿using Gcodes.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Gcodes.Test
