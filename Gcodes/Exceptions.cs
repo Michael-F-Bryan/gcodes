@@ -43,8 +43,13 @@ namespace Gcodes
     [Serializable]
     public class ParseException : GcodeException
     {
+        public Span Span { get; }
         public ParseException() { }
         public ParseException(string message) : base(message) { }
+        public ParseException(string message, Span span) : base(message)
+        {
+            Span = span;
+        }
         public ParseException(string message, Exception inner) : base(message, inner) { }
         protected ParseException(
           System.Runtime.Serialization.SerializationInfo info,
@@ -57,7 +62,8 @@ namespace Gcodes
     {
         public TokenKind[] Expected { get; }
 
-        public UnexpectedEOFException(TokenKind[] expected) : this($"Expected one of [{string.Join(", ", expected)}] but reached the end of input")
+        public UnexpectedEOFException(TokenKind[] expected)
+            : this($"Expected one of [{string.Join(", ", expected)}] but reached the end of input")
         {
             Expected = expected;
         }
@@ -69,18 +75,17 @@ namespace Gcodes
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
-
     [Serializable]
     public class UnexpectedTokenException : ParseException
     {
         public TokenKind[] Expected { get; }
         public TokenKind Found { get; }
-        public Span Location { get; }
 
-        public UnexpectedTokenException(TokenKind[] expected, TokenKind found, Span location) : this($"Expected one of [{string.Join(", ", expected)}] but found {found} at index {location}") {
+        public UnexpectedTokenException(TokenKind[] expected, TokenKind found, Span span)
+            : base($"Expected one of [{string.Join(", ", expected)}] but found {found} at index {span}", span)
+        {
             Expected = expected;
             Found = found;
-            Location = location;
         }
 
         public UnexpectedTokenException() { }

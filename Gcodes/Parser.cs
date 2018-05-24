@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gcodes
 {
@@ -35,19 +33,45 @@ namespace Gcodes
         /// </code>
         /// </remarks>
         /// <returns></returns>
-        public Gcode NextGcode()
+        public Gcode ParseGCode()
         {
             var start = index;
 
             var g = Chomp(TokenKind.G);
-            var number = Chomp(TokenKind.Number);
+            if (g == null) return null;
 
-            if (g == null || number == null)
+            var numberTok = Chomp(TokenKind.Number);
+
+            if (numberTok == null)
             {
                 index = start;
                 return null;
             }
-            throw new NotImplementedException();
+            
+            if (numberTok.Value.Contains('.') || numberTok.Value.Contains('-'))
+            {
+                throw new ParseException("The number for a \"G\" code should be a positive integer", numberTok.Span);
+            }
+
+            var number = int.Parse(numberTok.Value);
+
+            var args = new List<Argument>();
+
+            while (!Finished)
+            {
+                var arg = ParseArgument();
+                if (arg != null)
+                {
+                    args.Add(arg);
+                } else
+                {
+                    break;
+                }
+            }
+
+            var span = args.Aggregate(g.Span.Merge(numberTok.Span), (acc, elem) => acc.Merge(elem.Span));
+
+            return new Gcode(number, args, span);
         }
 
         internal Argument ParseArgument()

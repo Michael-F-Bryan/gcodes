@@ -15,7 +15,7 @@ namespace Gcodes.Test
             var src = "G01";
             var parser = new Parser(src);
 
-            var got = parser.NextGcode();
+            var got = parser.ParseGCode();
 
             Assert.Equal(1, got.Number);
             Assert.Equal(new Span(0, 3), got.Span);
