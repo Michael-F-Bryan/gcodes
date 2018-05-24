@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Gcodes.Tokens
 {
@@ -18,9 +19,21 @@ namespace Gcodes.Tokens
             End = end;
         }
 
+        public int LineNumber(string src)
+        {
+            var start = Start;
+            return src.Where((_, i) => i < start).Where(c => c == '\n').Count() + 1;
+        }
+
+        public int ColumnNumber(string src)
+        {
+            var lastNewline = src.LastIndexOf('\n', Start);
+            return lastNewline < 0 ? Start : Start - lastNewline;
+        }
+
         public override string ToString()
         {
-            return $"{Start}:{End}";
+            return $"{Start}-{End}";
         }
 
         public Span Merge(Span other)

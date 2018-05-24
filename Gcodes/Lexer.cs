@@ -85,8 +85,7 @@ namespace Gcodes
 
         private int CurrentColumn()
         {
-            var lastNewline = src.LastIndexOf('\n', pointer, pointer);
-
+            var lastNewline = src.LastIndexOf('\n', pointer);
             return lastNewline < 0 ? pointer : pointer - lastNewline;
         }
     }
