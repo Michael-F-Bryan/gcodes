@@ -17,7 +17,7 @@ namespace Gcodes.Test
         [Fact]
         public void DetectInvalidCharacters()
         {
-            var shouldBe = new UnrecognisedCharacterException(0, '$');
+            var shouldBe = new UnrecognisedCharacterException(1, 1, '$');
             var lexer = new Lexer("$Foo");
 
             try
@@ -26,7 +26,8 @@ namespace Gcodes.Test
             }
             catch (UnrecognisedCharacterException got)
             {
-                Assert.Equal(shouldBe.Index, got.Index);
+                Assert.Equal(shouldBe.Line, got.Line);
+                Assert.Equal(shouldBe.Column, got.Column);
                 Assert.Equal(shouldBe.Character, got.Character);
                 return;
             }
@@ -35,10 +36,6 @@ namespace Gcodes.Test
         }
 
         [Theory]
-        [InlineData("12", TokenKind.Number)]
-        [InlineData("1.23", TokenKind.Number)]
-        [InlineData("-1.23", TokenKind.Number)]
-        [InlineData("-1.", TokenKind.Number)]
         [InlineData("G", TokenKind.G)]
         [InlineData("N", TokenKind.N)]
         [InlineData("M", TokenKind.M)]
@@ -52,6 +49,21 @@ namespace Gcodes.Test
             var tok = lexer.Tokenize().First();
 
             Assert.Equal(kind, tok.Kind);
+        }
+
+        [Theory]
+        [InlineData("12")]
+        [InlineData("1.23")]
+        [InlineData(".23")]
+        [InlineData("0.")]
+        [InlineData("-1.23")]
+        [InlineData("-1.")]
+        public void RecogniseVariousNumbers(string src)
+        {
+            var lexer = new Lexer(src);
+            var tok = lexer.Tokenize().First();
+
+            Assert.Equal(TokenKind.Number, tok.Kind);
         }
 
         [Fact]
@@ -89,6 +101,17 @@ namespace Gcodes.Test
             var got = lexer.Tokenize().ToList();
 
             Assert.Equal(shouldBe, got);
+        }
+
+        [Theory]
+        [InlineData("G0 X-0.5 Y0.")]
+        [InlineData("Y0.")]
+        public void TokenizeTroublesomeLines(string src)
+        {
+            var lexer = new Lexer(src);
+            var got = lexer.Tokenize().ToList();
+
+            Assert.NotEmpty(got);
         }
     }
 }

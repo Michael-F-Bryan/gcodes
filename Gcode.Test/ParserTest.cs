@@ -70,5 +70,17 @@ namespace Gcodes.Test
 
             Assert.Equal(shouldBe, got);
         }
+
+        [Theory]
+        [InlineData("circle.txt")]
+        [InlineData("simple_mill.txt")]
+        public void ParseRealGcodes(string filename)
+        {
+            var src = EmbeddedFixture.ExtractFile(filename);
+            var parser = new Parser(src);
+
+            var got = parser.Parse();
+            Assert.NotNull(got);
+        }
     }
 }

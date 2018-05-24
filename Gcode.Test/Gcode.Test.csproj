@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbeddedFixture.cs" />
     <Compile Include="LexerTest.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="PatternTest.cs" />
@@ -73,6 +74,12 @@
       <Project>{196c59da-b880-465d-a1bb-c114067ca838}</Project>
       <Name>Gcodes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="simple_mill.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="circle.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

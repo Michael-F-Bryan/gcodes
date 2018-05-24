@@ -1,5 +1,7 @@
 ﻿using Gcodes.Tokens;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Gcodes
@@ -10,12 +12,14 @@ namespace Gcodes
         Regex skips;
         string src;
         int pointer;
+        int lineNumber;
 
         public Lexer(string src)
         {
             skips = new Regex(@"\G\s+|;[^\n]*", RegexOptions.Compiled);
             this.src = src;
             pointer = 0;
+            lineNumber = 0;
 
             patterns = new List<Pattern>
             {
@@ -27,7 +31,7 @@ namespace Gcodes
                 new Pattern(@"\GZ", TokenKind.Z),
                 new Pattern(@"\GF", TokenKind.F),
 
-                new Pattern(@"\G[-+]?[0-9]*\.?[0-9]+", TokenKind.Number),
+                new Pattern(@"\G[-+]?(\d+\.\d+|\.\d+|\d+\.?)", TokenKind.Number),
             };
         }
 
@@ -49,6 +53,7 @@ namespace Gcodes
                 if (match.Success)
                 {
                     pointer += match.Length;
+                    lineNumber += match.Value.Count(c => c == '\n');
                 }
                 else
                 {
@@ -64,11 +69,23 @@ namespace Gcodes
                 if (pat.TryMatch(src, pointer, out Token tok))
                 {
                     pointer = tok.Span.End;
+                    if (tok.Value != null)
+                    {
+                        lineNumber += tok.Value.Count(c => c == '\n');
+                    }
                     return tok;
                 }
             }
 
-            throw new UnrecognisedCharacterException(pointer, src[pointer]);
+            var column = CurrentColumn();
+            throw new UnrecognisedCharacterException(lineNumber + 1, column + 1, src[pointer]);
+        }
+
+        private int CurrentColumn()
+        {
+            var lastNewline = src.LastIndexOf('\n', pointer, pointer);
+
+            return lastNewline < 0 ? pointer : pointer - lastNewline;
         }
     }
 }

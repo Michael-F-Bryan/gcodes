@@ -91,6 +91,14 @@ namespace Gcodes
             return new Argument(kind, value, span);
         }
 
+        public IEnumerable<Gcode> Parse()
+        {
+            while (!Finished)
+            {
+                yield return ParseGCode();
+            }
+        }
+
         internal LineNumber ParseLineNumber()
         {
             var n = Chomp(TokenKind.N);

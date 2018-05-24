@@ -1,0 +1,13 @@
+﻿; A circle. Taken from http://www.diymachining.com/g-code-example/
+
+G17 G20 G90 G94 G54
+G0 Z0.25
+G0 X-0.5 Y0.
+G0 Z0.1
+G01 Z0. F5.
+G02 X0. Y0.5 I0.5 J0. F2.5
+G0 X0.5 Y0. I0. J-0.5
+G0 X0. Y-0.5 I-0.5 J0.
+G0 X-0.5 Y0. I0. J0.5
+G01 Z0.1 F5.
+G00 X0. Y0. Z0.25

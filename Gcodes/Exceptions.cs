@@ -19,12 +19,15 @@ namespace Gcodes
     [Serializable]
     public class UnrecognisedCharacterException : GcodeException
     {
-        public int Index { get; }
+        public int Line { get; }
+        public int Column { get; }
         public char Character { get; }
 
-        public UnrecognisedCharacterException(int index, char character) : this($"Unrecognised character \"{character}\" at index {index}")
+        public UnrecognisedCharacterException(int line, int column, char character)
+            : this($"Unrecognised character \"{character}\" at line {line} column {column}")
         {
-            Index = index;
+            Line = line;
+            Column = column;
             Character = character;
         }
         public UnrecognisedCharacterException() { }

@@ -3,7 +3,7 @@ using Gcodes.Tokens;
 using System;
 using Xunit;
 
-namespace Gcode.Test
+namespace Gcodes.Test
 {
     public class TokenKindTest
     {
