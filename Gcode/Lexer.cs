@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Gcode
 {
-    public class Class1
+    public class Lexer
     {
+        List<Pattern> patterns;
+
+        public Lexer()
+        {
+            patterns = new List<Pattern>();
+        }
     }
 }
