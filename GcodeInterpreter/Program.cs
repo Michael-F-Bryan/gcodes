@@ -2,6 +2,9 @@
 using CommandLine.Text;
 using Gcodes;
 using Gcodes.Tokens;
+using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,21 +22,33 @@ namespace GcodeInterpreter
                 .MapResult(opts => Run(opts), _ => 1);
         }
 
+        private static void Initializelogger(Options opts)
+        {
+            var minLevel = opts.Verbose ? LogEventLevel.Debug : LogEventLevel.Information;
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.WithExceptionDetails()
+                    .MinimumLevel.Is(minLevel)
+                  .WriteTo.Console()
+                .CreateLogger();
+        }
+
         private static int Run(Options opts)
         {
+            Initializelogger(opts);
+
             try
             {
+                Log.Debug("Reading {Filename}", opts.InputFile);
                 var src = File.ReadAllText(opts.InputFile);
 
-                var lexer = new Lexer(src);
-                var tokens = lexer.Tokenize().ToList();
-
-                var parser = new Gcodes.Parser(tokens);
-                var gcodes = parser.Parse().ToList();
+                var vm = new Interpreter(src);
+                vm.Run();
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("Error: " + ex.Message);
+                Log.Error(ex.Message);
+                Log.Debug(ex, "An error occurred");
                 return 1;
             }
 
@@ -44,6 +59,8 @@ namespace GcodeInterpreter
     class Options
     {
         [Value(0, MetaName = "input file", HelpText = "The gcode file to interpret", Required = true)]
-        public string InputFile { get; set; }
+        public string InputFile { get; internal set; }
+        [Option(SetName = "verbose", Default = false, HelpText = "Enable verbose output")]
+        public bool Verbose { get; internal set; }
     }
 }

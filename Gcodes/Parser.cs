@@ -48,7 +48,7 @@ namespace Gcodes
                 index = start;
                 return null;
             }
-            
+
             if (numberTok.Value.Contains('.') || numberTok.Value.Contains('-'))
             {
                 throw new ParseException("The number for a \"G\" code should be a positive integer", numberTok.Span);
@@ -64,7 +64,8 @@ namespace Gcodes
                 if (arg != null)
                 {
                     args.Add(arg);
-                } else
+                }
+                else
                 {
                     break;
                 }
@@ -95,7 +96,16 @@ namespace Gcodes
         {
             while (!Finished)
             {
-                yield return ParseGCode();
+                var code = ParseGCode();
+
+                if (code == null)
+                {
+                    yield break;
+                }
+                else
+                {
+                    yield return code;
+                }
             }
         }
 
