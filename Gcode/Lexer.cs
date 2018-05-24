@@ -66,7 +66,7 @@ namespace Gcode
             {
                 if (pat.TryMatch(src, pointer, out Token tok))
                 {
-                    pointer += tok.Value.Length;
+                    pointer = tok.Span.End;
                     return tok;
                 }
             }

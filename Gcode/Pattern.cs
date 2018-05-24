@@ -24,7 +24,15 @@ namespace Gcode
             if (match.Success)
             {
                 var span = new Span(startIndex, startIndex + match.Length);
-                tok = new Token(span, kind, match.Value);
+
+                if (kind.HasValue())
+                {
+                    tok = new Token(span, kind, match.Value);
+                }
+                else
+                {
+                    tok = new Token(span, kind);
+                }
                 return true;
             }
             else

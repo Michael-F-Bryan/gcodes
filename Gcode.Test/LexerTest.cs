@@ -69,5 +69,24 @@ namespace Gcode.Test
             var tok = lexer.Tokenize().First();
             Assert.Equal(TokenKind.G, tok.Kind);
         }
+
+        [Fact]
+        public void LexSomeBasicGcodeStuff()
+        {
+            var lexer = new Lexer("G10 X50.0 Y100.0");
+            var shouldBe = new List<Token>
+            {
+                new Token(new Span(0, 1), TokenKind.G),
+                new Token(new Span(1, 3), TokenKind.Integer, "10"),
+                new Token(new Span(4, 5), TokenKind.X),
+                new Token(new Span(5, 9), TokenKind.Float, "50.0"),
+                new Token(new Span(10, 11), TokenKind.Y),
+                new Token(new Span(11, 16), TokenKind.Float, "100.0"),
+            };
+
+            var got = lexer.Tokenize().ToList();
+
+            Assert.Equal(shouldBe, got);
+        }
     }
 }
