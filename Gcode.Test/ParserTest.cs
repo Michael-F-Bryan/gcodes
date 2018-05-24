@@ -22,6 +22,24 @@ namespace Gcodes.Test
         }
 
         [Fact]
+        public void MoreInterestingGcode()
+        {
+            var src = "G555 X-23.4 F1200 Y-0.0 Z+3.1415";
+            var parser = new Parser(src);
+
+            var got = parser.ParseGCode();
+
+            Assert.Equal(555, got.Number);
+            Assert.Equal(new Span(0, src.Length), got.Span);
+            Assert.Equal(4, got.Arguments.Count);
+
+            Assert.Equal(-23.4, got.ValueFor(ArgumentKind.X));
+            Assert.Equal(1200, got.ValueFor(ArgumentKind.FeedRate));
+            Assert.Equal(0, got.ValueFor(ArgumentKind.Y));
+            Assert.Equal(3.1415, got.ValueFor(ArgumentKind.Z));
+        }
+
+        [Fact]
         public void ParseLineNumber()
         {
             var src = "n10";

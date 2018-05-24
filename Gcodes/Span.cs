@@ -8,6 +8,11 @@ namespace Gcodes
 {
     public struct Span
     {
+        /// <summary>
+        ///  The empty span.
+        /// </summary>
+        public static Span Empty = new Span(0, 0);
+
         public int Start { get; }
         public int End { get; }
 

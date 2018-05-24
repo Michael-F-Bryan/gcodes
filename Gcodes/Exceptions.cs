@@ -43,7 +43,7 @@ namespace Gcodes
     [Serializable]
     public class ParseException : GcodeException
     {
-        public Span Span { get; }
+        public Span Span { get; } = Span.Empty;
         public ParseException() { }
         public ParseException(string message) : base(message) { }
         public ParseException(string message, Span span) : base(message)
