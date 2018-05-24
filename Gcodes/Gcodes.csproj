@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Argument.cs" />
     <Compile Include="Ast\LineNumber.cs" />
+    <Compile Include="TokenKind.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Ast\Gcode.cs" />
     <Compile Include="Lexer.cs" />

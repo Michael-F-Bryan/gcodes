@@ -52,7 +52,18 @@ namespace Gcodes
 
         internal Argument ParseArgument()
         {
-            throw new NotImplementedException();
+            var kindTok = Chomp(TokenKind.F, TokenKind.X, TokenKind.Y, TokenKind.Z);
+            if (kindTok == null) return null;
+
+            var valueTok = Chomp(TokenKind.Float);
+            if (valueTok == null)
+                ThrowParseError(TokenKind.Float);
+
+            var span = kindTok.Span.Merge(valueTok.Span);
+            var value = double.Parse(valueTok.Value);
+            var kind = kindTok.Kind.AsArgumentKind();
+
+            return new Argument(kind, value, span);
         }
 
         internal LineNumber ParseLineNumber()
@@ -83,10 +94,10 @@ namespace Gcodes
             }
         }
 
-        private Token Chomp(TokenKind kind)
+        private Token Chomp(params TokenKind[] kind)
         {
             var tok = Peek();
-            if (tok?.Kind == kind)
+            if (tok != null && kind.Contains(tok.Kind))
             {
                 index += 1;
                 return tok;

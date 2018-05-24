@@ -67,32 +67,4 @@ namespace Gcodes
             return !(token1 == token2);
         }
     }
-
-    public enum TokenKind
-    {
-        G,
-        M,
-        X,
-        Y,
-        Integer,
-        Float,
-        Z,
-        F,
-        N,
-    }
-
-    public static class TokenKindExt
-    {
-        public static bool HasValue(this TokenKind kind)
-        {
-            switch (kind)
-            {
-                case TokenKind.Integer:
-                case TokenKind.Float:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-    }
 }
