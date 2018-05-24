@@ -8,9 +8,6 @@ namespace Gcode
 {
     public class Token
     {
-        TokenKind kind;
-        string value;
-
         public Token(Span span, TokenKind kind, string value)
         {
             Span = span;
