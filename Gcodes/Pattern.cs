@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Gcode
+namespace Gcodes
 {
     public class Pattern
     {
@@ -13,7 +13,7 @@ namespace Gcode
             if (!pattern.StartsWith(@"\G"))
                 throw new ArgumentException("Pattern must match the start of input", nameof(pattern));
 
-            regex = new Regex(pattern, RegexOptions.Compiled);
+            regex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             this.kind = kind;
         }
 

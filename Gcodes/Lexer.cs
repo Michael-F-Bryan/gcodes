@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Gcode
+namespace Gcodes
 {
     public class Lexer
     {
@@ -23,13 +23,14 @@ namespace Gcode
             patterns = new List<Pattern>
             {
                 new Pattern(@"\GG", TokenKind.G),
+                new Pattern(@"\GN", TokenKind.N),
                 new Pattern(@"\GM", TokenKind.M),
                 new Pattern(@"\GX", TokenKind.X),
                 new Pattern(@"\GY", TokenKind.Y),
                 new Pattern(@"\GZ", TokenKind.Z),
                 new Pattern(@"\GF", TokenKind.F),
 
-                new Pattern(@"\G\d+\.\d+", TokenKind.Float),
+                new Pattern(@"\G-?\d+\.\d+", TokenKind.Float),
                 new Pattern(@"\G\d+", TokenKind.Integer),
             };
         }

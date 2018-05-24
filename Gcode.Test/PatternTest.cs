@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Gcode.Test
+namespace Gcodes.Test
 {
     public class PatternTest
     {
@@ -42,6 +42,17 @@ namespace Gcode.Test
 
             Assert.False(pat.TryMatch(src, 0, out Token tok));
             Assert.Null(tok);
+        }
+
+        [Fact]
+        public void PatternIgnoreCase()
+        {
+            var pat = new Pattern(@"\Gasd", TokenKind.Integer);
+
+
+            Assert.True(pat.TryMatch("asd", 0, out Token tok));
+            Assert.True(pat.TryMatch("ASD", 0, out tok));
+            Assert.True(pat.TryMatch("AsD", 0, out tok));
         }
     }
 }

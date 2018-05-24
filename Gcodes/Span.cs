@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcode
+namespace Gcodes
 {
     public struct Span
     {
@@ -20,6 +20,11 @@ namespace Gcode
         public override string ToString()
         {
             return $"{Start}:{End}";
+        }
+
+        public Span Merge(Span other)
+        {
+            return new Span(Math.Min(Start, other.Start), Math.Max(End, other.End));
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gcode
+namespace Gcodes
 {
     public class Token : IEquatable<Token>
     {
@@ -78,6 +78,7 @@ namespace Gcode
         Float,
         Z,
         F,
+        N,
     }
 
     public static class TokenKindExt

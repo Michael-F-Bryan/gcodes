@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Gcode.Test
+namespace Gcodes.Test
 {
     public class LexerTest
     {
@@ -38,7 +38,9 @@ namespace Gcode.Test
         [Theory]
         [InlineData("12", TokenKind.Integer)]
         [InlineData("1.23", TokenKind.Float)]
+        [InlineData("-1.23", TokenKind.Float)]
         [InlineData("G", TokenKind.G)]
+        [InlineData("N", TokenKind.N)]
         [InlineData("M", TokenKind.M)]
         [InlineData("X", TokenKind.X)]
         [InlineData("Y", TokenKind.Y)]

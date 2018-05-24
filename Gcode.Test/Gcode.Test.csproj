@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LexerTest.cs" />
+    <Compile Include="ParserTest.cs" />
     <Compile Include="PatternTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,9 +68,9 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gcode\Gcode.csproj">
+    <ProjectReference Include="..\Gcodes\Gcodes.csproj">
       <Project>{196c59da-b880-465d-a1bb-c114067ca838}</Project>
-      <Name>Gcode</Name>
+      <Name>Gcodes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
