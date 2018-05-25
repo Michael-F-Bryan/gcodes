@@ -100,18 +100,17 @@ namespace Gcodes.Test
         [Fact]
         public void CommentsTriggerAnEvent()
         {
-            var lexer = new Lexer("( this is a comment)G13\n;And so is this\n");
-            var comments = new List<string>();
-            lexer.CommentDetected += (s, e) => comments.Add(e.Comment);
+            const string src = "( this is a comment)G13\n;And so is this\n";
+            var lexer = new Lexer(src);
+            var comments = new List<CommentEventArgs>();
+            lexer.CommentDetected += (s, e) => comments.Add(e);
 
             _ = lexer.Tokenize().Count();
 
-            var shouldBe = new List<string>
-            {
-                " this is a comment",
-                "And so is this",
-            };
-            Assert.Equal(shouldBe, comments);
+            var commentsShouldBe = new List<string> { " this is a comment", "And so is this" };
+            Assert.Equal(commentsShouldBe, comments.Select(e => e.Comment).ToList());
+            var spansShouldBe = new List<Span> { new Span(0, 20), new Span(24, src.Length - 1) };
+            Assert.Equal(spansShouldBe, comments.Select(e => e.Span).ToList());
         }
 
         [Fact]

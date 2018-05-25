@@ -95,9 +95,9 @@ namespace Gcodes
 
                     if (match.Success)
                     {
+                        OnCommentDetected(match);
                         pointer += match.Length;
                         lineNumber += match.Value.Count(c => c == '\n');
-                        OnCommentDetected(match);
                     }
                 }
             } while (pointer < src.Length && pointer != currentPass);
@@ -110,7 +110,8 @@ namespace Gcodes
                 var group = match.Groups[i];
                 if (group.Success)
                 {
-                    CommentDetected?.Invoke(this, new CommentEventArgs(group.Value));
+                    var span = new Span(pointer, pointer + match.Length);
+                    CommentDetected?.Invoke(this, new CommentEventArgs(group.Value, span));
                     break;
                 }
             }
@@ -142,13 +143,25 @@ namespace Gcodes
         }
     }
 
+    /// <summary>
+    /// The event arguments passed in when the <see cref="Lexer.CommentDetected"/>
+    /// event is fired.
+    /// </summary>
     public class CommentEventArgs : EventArgs
     {
-        public CommentEventArgs(string comment)
+        internal CommentEventArgs(string comment, Span span)
         {
             Comment = comment ?? throw new ArgumentNullException(nameof(comment));
+            Span = span;
         }
 
+        /// <summary>
+        /// The comment's contents.
+        /// </summary>
         public string Comment { get; }
+        /// <summary>
+        /// The location of the comment in the source text.
+        /// </summary>
+        public Span Span { get; }
     }
 }
