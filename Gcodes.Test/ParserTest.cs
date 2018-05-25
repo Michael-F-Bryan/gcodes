@@ -199,5 +199,17 @@ namespace Gcodes.Test
 
             Assert.True(parser.GetFinished());
         }
+
+        [Fact]
+        public void BaumerCodeHas64Items()
+        {
+            var src = EmbeddedFixture.ExtractFile("371373P.gcode");
+            var parser = new Parser(src);
+
+            var numCodes = parser.Parse().Count();
+
+            // manually counted the number of g/m codes in the baumer file :(
+            Assert.Equal(64, numCodes);
+        }
     }
 }
