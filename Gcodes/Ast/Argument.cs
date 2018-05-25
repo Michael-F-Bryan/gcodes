@@ -58,5 +58,12 @@ namespace Gcodes.Ast
         Y,
         Z,
         FeedRate,
+        K,
+        J,
+        I,
+        C,
+        B,
+        A,
+        P,
     }
 }

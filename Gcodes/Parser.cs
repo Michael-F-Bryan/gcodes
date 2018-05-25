@@ -78,7 +78,10 @@ namespace Gcodes
 
         internal Argument ParseArgument()
         {
-            var kindTok = Chomp(TokenKind.F, TokenKind.X, TokenKind.Y, TokenKind.Z);
+            var kindTok = Chomp(TokenKind.F, TokenKind.P,
+                TokenKind.X, TokenKind.Y, TokenKind.Z,
+                TokenKind.I, TokenKind.J, TokenKind.K,
+                TokenKind.A, TokenKind.B, TokenKind.C);
             if (kindTok == null) return null;
 
             var valueTok = Chomp(TokenKind.Number);
@@ -96,16 +99,22 @@ namespace Gcodes
         {
             while (!Finished)
             {
-                var code = ParseGCode();
+                yield return NextItem();
+            }
+        }
 
-                if (code == null)
-                {
-                    yield break;
-                }
-                else
-                {
-                    yield return code;
-                }
+        private Gcode NextItem()
+        {
+            var g = ParseGCode();
+
+            if (g == null)
+            {
+                ThrowParseError(TokenKind.G);
+                throw new Exception("Unreachable");
+            }
+            else
+            {
+                return g;
             }
         }
 

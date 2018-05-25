@@ -41,6 +41,12 @@ namespace Gcodes
                 new Pattern(@"\GF", TokenKind.F),
                 new Pattern(@"\GI", TokenKind.I),
                 new Pattern(@"\GJ", TokenKind.J),
+                new Pattern(@"\GK", TokenKind.K),
+                new Pattern(@"\GA", TokenKind.A),
+                new Pattern(@"\GB", TokenKind.B),
+                new Pattern(@"\GC", TokenKind.C),
+                new Pattern(@"\GH", TokenKind.H),
+                new Pattern(@"\GP", TokenKind.P),
 
                 new Pattern(@"\G[-+]?(\d+\.\d+|\.\d+|\d+\.?)", TokenKind.Number),
             };

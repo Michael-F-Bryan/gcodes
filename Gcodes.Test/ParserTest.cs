@@ -1,5 +1,6 @@
 ﻿using Gcodes.Ast;
 using Gcodes.Tokens;
+using System.Linq;
 using Xunit;
 
 namespace Gcodes.Test
@@ -72,6 +73,27 @@ namespace Gcodes.Test
         }
 
         [Theory]
+        [InlineData('a')]
+        [InlineData('b')]
+        [InlineData('C')]
+        [InlineData('f')]
+        [InlineData('P')]
+        [InlineData('X')]
+        [InlineData('Y')]
+        [InlineData('Z')]
+        [InlineData('I')]
+        [InlineData('J')]
+        [InlineData('K')]
+        public void CharacterIsArgumentKind(char c)
+        {
+            var parser = new Parser($"{c}50.0");
+
+            var got = parser.ParseArgument();
+
+            Assert.NotNull(got);
+        }
+
+        [Theory]
         [InlineData("circle.txt")]
         [InlineData("simple_mill.txt")]
         [InlineData("371373P.gcode")]
@@ -80,8 +102,9 @@ namespace Gcodes.Test
             var src = EmbeddedFixture.ExtractFile(filename);
             var parser = new Parser(src);
 
-            var got = parser.Parse();
-            Assert.NotNull(got);
+            var got = parser.Parse().ToList();
+
+            Assert.NotEmpty(got);
         }
     }
 }

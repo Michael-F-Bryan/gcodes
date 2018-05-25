@@ -15,6 +15,12 @@ namespace Gcodes.Tokens
         N,
         I,
         J,
+        A,
+        B,
+        C,
+        H,
+        P,
+        K,
     }
 
     public static class TokenKindExt
@@ -40,6 +46,23 @@ namespace Gcodes.Tokens
                     return ArgumentKind.Y;
                 case TokenKind.Z:
                     return ArgumentKind.Z;
+
+                case TokenKind.A:
+                    return ArgumentKind.A;
+                case TokenKind.B:
+                    return ArgumentKind.B;
+                case TokenKind.C:
+                    return ArgumentKind.C;
+
+                case TokenKind.I:
+                    return ArgumentKind.I;
+                case TokenKind.J:
+                    return ArgumentKind.J;
+                case TokenKind.K:
+                    return ArgumentKind.K;
+
+                case TokenKind.P:
+                    return ArgumentKind.P;
                 case TokenKind.F:
                     return ArgumentKind.FeedRate;
                 default:

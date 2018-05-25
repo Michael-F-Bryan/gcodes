@@ -81,7 +81,7 @@ namespace Gcodes
         public TokenKind Found { get; }
 
         public UnexpectedTokenException(TokenKind[] expected, TokenKind found, Span span)
-            : base($"Expected one of [{string.Join(", ", expected)}] but found {found} at index {span}", span)
+            : base($"Expected one of [{string.Join(", ", expected)}] but found {found}", span)
         {
             Expected = expected;
             Found = found;
