@@ -64,6 +64,7 @@
     <Compile Include="TokenKindTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Fixtures\371373P.gcode" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

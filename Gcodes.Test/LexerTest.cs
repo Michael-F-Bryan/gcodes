@@ -78,6 +78,32 @@ namespace Gcodes.Test
         }
 
         [Fact]
+        public void BracketsAreCommentsToo()
+        {
+            var lexer = new Lexer("( this is a comment)G13");
+
+            var tok = lexer.Tokenize().First();
+            Assert.Equal(TokenKind.G, tok.Kind);
+        }
+
+        [Fact]
+        public void CommentsTriggerAnEvent()
+        {
+            var lexer = new Lexer("( this is a comment)G13\n;And so is this\n");
+            var comments = new List<string>();
+            lexer.CommentDetected += (s, e) => comments.Add(e.Comment);
+
+            _ = lexer.Tokenize().Count();
+
+            var shouldBe = new List<string>
+            {
+                " this is a comment",
+                "And so is this",
+            };
+            Assert.Equal(shouldBe, comments);
+        }
+
+        [Fact]
         public void SkipWhitespace()
         {
             var lexer = new Lexer(" G");

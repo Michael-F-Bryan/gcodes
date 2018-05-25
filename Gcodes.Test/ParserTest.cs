@@ -74,6 +74,7 @@ namespace Gcodes.Test
         [Theory]
         [InlineData("circle.txt")]
         [InlineData("simple_mill.txt")]
+        [InlineData("371373P.gcode")]
         public void ParseRealGcodes(string filename)
         {
             var src = EmbeddedFixture.ExtractFile(filename);

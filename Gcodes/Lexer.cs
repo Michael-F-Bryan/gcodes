@@ -9,14 +9,23 @@ namespace Gcodes
     public class Lexer
     {
         List<Pattern> patterns;
-        Regex skips;
+        List<Regex> skips;
         string src;
         int pointer;
         int lineNumber;
 
+        public bool Finished => pointer >= src.Length;
+
+        public event EventHandler<CommentEventArgs> CommentDetected;
+
         public Lexer(string src)
         {
-            skips = new Regex(@"\G\s+|;[^\n]*", RegexOptions.Compiled);
+            skips = new List<Regex>
+            {
+                new Regex(@"\G\s+", RegexOptions.Compiled),
+                new Regex(@"\G;([^\n\r]*)", RegexOptions.Compiled),
+                new Regex(@"\G\(([^)\n\r]*)\)", RegexOptions.Compiled),
+            };
             this.src = src;
             pointer = 0;
             lineNumber = 0;
@@ -39,27 +48,45 @@ namespace Gcodes
 
         public IEnumerable<Token> Tokenize()
         {
-            while (pointer < src.Length)
+            while (!Finished)
             {
                 SkipStuff();
+                if (Finished) break;
                 yield return NextToken();
             }
         }
 
         private void SkipStuff()
         {
-            while (pointer < src.Length)
-            {
-                var match = skips.Match(src, pointer);
+            int currentPass;
 
-                if (match.Success)
+            do
+            {
+                currentPass = pointer;
+
+                foreach (var skip in skips)
                 {
-                    pointer += match.Length;
-                    lineNumber += match.Value.Count(c => c == '\n');
+                    var match = skip.Match(src, pointer);
+
+                    if (match.Success)
+                    {
+                        pointer += match.Length;
+                        lineNumber += match.Value.Count(c => c == '\n');
+                        OnCommentDetected(match);
+                    }
                 }
-                else
+            } while (pointer < src.Length && pointer != currentPass);
+        }
+
+        private void OnCommentDetected(Match match)
+        {
+            for (int i = 1; i < match.Groups.Count; i++)
+            {
+                var group = match.Groups[i];
+                if (group.Success)
                 {
-                    return;
+                    CommentDetected?.Invoke(this, new CommentEventArgs(group.Value));
+                    break;
                 }
             }
         }
@@ -88,5 +115,15 @@ namespace Gcodes
             var lastNewline = src.LastIndexOf('\n', pointer);
             return lastNewline < 0 ? pointer : pointer - lastNewline;
         }
+    }
+
+    public class CommentEventArgs : EventArgs
+    {
+        public CommentEventArgs(string comment)
+        {
+            Comment = comment ?? throw new ArgumentNullException(nameof(comment));
+        }
+
+        public string Comment { get; }
     }
 }
