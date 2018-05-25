@@ -1,5 +1,6 @@
 ﻿using Gcodes.Ast;
 using Gcodes.Tokens;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -15,8 +16,20 @@ namespace Gcodes.Test
 
             var got = parser.ParseGCode();
 
-            Assert.Equal(1, got.Number);
-            Assert.Equal(new Span(0, 3), got.Span);
+            var shouldBe = new Gcode(1, new List<Argument>(), new Span(0, src.Length));
+            Assert.Equal(shouldBe, got);
+        }
+
+        [Fact]
+        public void BoringMcode()
+        {
+            var src = "N10 M5";
+            var parser = new Parser(src);
+
+            var got = parser.ParseMCode();
+
+            var shouldBe = new Mcode(5, new Span(0, src.Length), 10);
+            Assert.Equal(shouldBe, got);
         }
 
         [Fact]

@@ -21,6 +21,32 @@ namespace Gcodes
 
         public Parser(string src) : this(new Lexer(src).Tokenize().ToList()) { }
 
+        public Mcode ParseMCode()
+        {
+            var start = index;
+            var line = ParseLineNumber();
+
+            var m = Chomp(TokenKind.M);
+            if (m == null)
+            {
+                index = start;
+                return null;
+            }
+
+            var numberTok = ParseInteger();
+            if (numberTok == null)
+            {
+                index = start;
+                return null;
+            }
+
+            var number = int.Parse(numberTok.Value);
+            var span = numberTok.Span.Merge(m.Span);
+            span = line == null ? span : span.Merge(line.Span);
+
+            return new Mcode(number, span, line?.Number);
+        }
+
         /// <summary>
         /// Parse a single gcode.
         /// </summary>
@@ -38,22 +64,16 @@ namespace Gcodes
         {
             var start = index;
 
+            var line = ParseLineNumber();
+
             var g = Chomp(TokenKind.G);
-            if (g == null) return null;
-
-            var numberTok = Chomp(TokenKind.Number);
-
-            if (numberTok == null)
+            if (g == null)
             {
                 index = start;
                 return null;
             }
 
-            if (numberTok.Value.Contains('.') || numberTok.Value.Contains('-'))
-            {
-                throw new ParseException("The number for a \"G\" code should be a positive integer", numberTok.Span);
-            }
-
+            var numberTok = ParseInteger();
             var number = int.Parse(numberTok.Value);
 
             var args = new List<Argument>();
@@ -73,7 +93,29 @@ namespace Gcodes
 
             var span = args.Aggregate(g.Span.Merge(numberTok.Span), (acc, elem) => acc.Merge(elem.Span));
 
-            return new Gcode(number, args, span);
+            if (line != null)
+            {
+                span = span.Merge(line.Span);
+            }
+
+            return new Gcode(number, args, span, line?.Number);
+        }
+
+        private Token ParseInteger()
+        {
+            var numberTok = Chomp(TokenKind.Number);
+
+            if (numberTok == null)
+            {
+                return null;
+            }
+
+            if (numberTok.Value.Contains('.') || numberTok.Value.Contains('-'))
+            {
+                throw new ParseException("The number for a \"G\" code should be a positive integer", numberTok.Span);
+            }
+
+            return numberTok;
         }
 
         internal Argument ParseArgument()
