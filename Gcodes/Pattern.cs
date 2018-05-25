@@ -12,7 +12,7 @@ namespace Gcodes
         public Pattern(string pattern, TokenKind kind)
         {
             if (!pattern.StartsWith(@"\G"))
-                throw new ArgumentException("Pattern must match the start of input", nameof(pattern));
+                pattern = @"\G" + pattern;
 
             regex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             this.kind = kind;

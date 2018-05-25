@@ -128,7 +128,7 @@ namespace Gcodes
 
             var valueTok = Chomp(TokenKind.Number);
             if (valueTok == null)
-                ThrowParseError(TokenKind.Number);
+                throw ParseError(TokenKind.Number);
 
             var span = kindTok.Span.Merge(valueTok.Span);
             var value = double.Parse(valueTok.Value);
@@ -137,7 +137,7 @@ namespace Gcodes
             return new Argument(kind, value, span);
         }
 
-        public IEnumerable<Gcode> Parse()
+        public IEnumerable<Code> Parse()
         {
             while (!Finished)
             {
@@ -145,51 +145,70 @@ namespace Gcodes
             }
         }
 
-        private Gcode NextItem()
+        private Code NextItem()
         {
-            var g = ParseGCode();
+            Code got = ParseGCode() ?? ParseMCode() ?? (Code)ParseOCode();
 
-            if (g == null)
+            if (got == null)
+                throw ParseError(TokenKind.G, TokenKind.M, TokenKind.O);
+
+            return got;
+        }
+
+        internal Ocode ParseOCode()
+        {
+            var start = index;
+            var line = ParseLineNumber();
+
+            var O = Chomp(TokenKind.O);
+            if (O == null)
             {
-                ThrowParseError(TokenKind.G);
-                throw new Exception("Unreachable");
+                index = start;
+                return null;
             }
-            else
+
+            var numberTok = ParseInteger();
+            if (numberTok == null)
             {
-                return g;
+                throw ParseError(TokenKind.Number);
             }
+
+            var span = O.Span.Merge(numberTok.Span);
+            if (line != null)
+            {
+                span = span.Merge(line.Span);
+            }
+
+            return new Ocode(int.Parse(numberTok.Value), span, line?.Number);
         }
 
         internal LineNumber ParseLineNumber()
         {
+            var start = index;
+
             var n = Chomp(TokenKind.N);
             if (n == null) { return null; }
 
-            var number = Chomp(TokenKind.Number);
-            if (number == null)
+            var numberTok = ParseInteger();
+            if (numberTok == null)
             {
-                ThrowParseError(TokenKind.Number);
+                throw ParseError(TokenKind.Number);
             }
 
-            if (number.Value.Contains('.') || number.Value.Contains("-"))
-            {
-                throw new ParseException("Line numbers must be positive integers");
-            }
-
-            return new LineNumber(int.Parse(number.Value), n.Span.Merge(number.Span));
+            return new LineNumber(int.Parse(numberTok.Value), n.Span.Merge(numberTok.Span));
         }
 
-        private void ThrowParseError(params TokenKind[] expected)
+        private Exception ParseError(params TokenKind[] expected)
         {
             var next = Peek();
 
             if (next != null)
             {
-                throw new UnexpectedTokenException(expected, next.Kind, next.Span);
+                return new UnexpectedTokenException(expected, next.Kind, next.Span);
             }
             else
             {
-                throw new UnexpectedEOFException(expected);
+                return new UnexpectedEOFException(expected);
             }
         }
 

@@ -32,23 +32,26 @@ namespace Gcodes
 
             patterns = new List<Pattern>
             {
-                new Pattern(@"\GG", TokenKind.G),
-                new Pattern(@"\GN", TokenKind.N),
-                new Pattern(@"\GM", TokenKind.M),
-                new Pattern(@"\GX", TokenKind.X),
-                new Pattern(@"\GY", TokenKind.Y),
-                new Pattern(@"\GZ", TokenKind.Z),
-                new Pattern(@"\GF", TokenKind.F),
-                new Pattern(@"\GI", TokenKind.I),
-                new Pattern(@"\GJ", TokenKind.J),
-                new Pattern(@"\GK", TokenKind.K),
-                new Pattern(@"\GA", TokenKind.A),
-                new Pattern(@"\GB", TokenKind.B),
-                new Pattern(@"\GC", TokenKind.C),
-                new Pattern(@"\GH", TokenKind.H),
-                new Pattern(@"\GP", TokenKind.P),
+                new Pattern(@"G", TokenKind.G),
+                new Pattern(@"O", TokenKind.O),
+                new Pattern(@"N", TokenKind.N),
+                new Pattern(@"M", TokenKind.M),
+                new Pattern(@"T", TokenKind.T),
+                new Pattern(@"X", TokenKind.X),
+                new Pattern(@"Y", TokenKind.Y),
+                new Pattern(@"Z", TokenKind.Z),
+                new Pattern(@"F", TokenKind.F),
+                new Pattern(@"I", TokenKind.I),
+                new Pattern(@"J", TokenKind.J),
+                new Pattern(@"K", TokenKind.K),
+                new Pattern(@"A", TokenKind.A),
+                new Pattern(@"B", TokenKind.B),
+                new Pattern(@"C", TokenKind.C),
+                new Pattern(@"H", TokenKind.H),
+                new Pattern(@"P", TokenKind.P),
+                new Pattern(@"S", TokenKind.S),
 
-                new Pattern(@"\G[-+]?(\d+\.\d+|\.\d+|\d+\.?)", TokenKind.Number),
+                new Pattern(@"[-+]?(\d+\.\d+|\.\d+|\d+\.?)", TokenKind.Number),
             };
         }
 

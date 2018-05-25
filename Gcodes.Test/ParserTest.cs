@@ -33,6 +33,18 @@ namespace Gcodes.Test
         }
 
         [Fact]
+        public void ProgramNumber()
+        {
+            var src = "N10 O500";
+            var parser = new Parser(src);
+
+            var got = parser.ParseOCode();
+
+            var shouldBe = new Ocode(500, new Span(0, src.Length), 10);
+            Assert.Equal(shouldBe, got);
+        }
+
+        [Fact]
         public void MoreInterestingGcode()
         {
             var src = "G555 X-23.4 F1200 Y-0.0 Z+3.1415";

@@ -35,12 +35,12 @@ namespace GcodeInterpreter
             }
         }
 
-        private void Execute(Gcode code)
+        private void Execute(Code code)
         {
             var line = code.Span.LineNumber(src);
             var col = code.Span.ColumnNumber(src);
 
-            Log.Debug("Executing G{Number} at (L{Line}, C{Column})", code.Number, line, col);
+            Log.Debug("Executing {$Code} at (L{Line}, C{Column})", code, line, col);
         }
     }
 }

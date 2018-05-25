@@ -9,20 +9,14 @@ namespace Gcodes.Test
         [Fact]
         public void CanInstantiate()
         {
-            var pat = new Pattern(@"\GG", TokenKind.G);
-        }
-
-        [Fact]
-        public void MustAlwaysMatchInputStart()
-        {
-            Assert.Throws<ArgumentException>(() => new Pattern(@"\d+", TokenKind.Number));
+            var pat = new Pattern(@"G", TokenKind.G);
         }
 
         [Fact]
         public void MatchASimpleInteger()
         {
             var src = "123";
-            var pat = new Pattern(@"\G\d+", TokenKind.Number);
+            var pat = new Pattern(@"\d+", TokenKind.Number);
 
             Assert.True(pat.TryMatch(src, 0, out Token tok));
 

@@ -21,6 +21,9 @@ namespace Gcodes.Tokens
         H,
         P,
         K,
+        O,
+        T,
+        S,
     }
 
     public static class TokenKindExt
