@@ -10,6 +10,7 @@ namespace Gcodes.Ast
     {
         void VisitGcode(Gcode code);
         void VisitMcode(Mcode code);
+        void VisitTcode(Tcode tcode);
         void VisitProgramNumber(Ocode code);
     }
 }

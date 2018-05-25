@@ -143,5 +143,17 @@ namespace Gcodes.Test
 
             Assert.NotEmpty(got);
         }
+
+        [Fact]
+        public void IgnoreDuplicateLineNumbers()
+        {
+            var src = "N1 N2 N50";
+            var parser = new Parser(src);
+
+            var got = parser.ParseLineNumber();
+
+            Assert.NotNull(got);
+            Assert.Equal(50, got.Number);
+        }
     }
 }

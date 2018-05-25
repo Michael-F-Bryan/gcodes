@@ -7,7 +7,7 @@ using Gcodes.Tokens;
 
 namespace Gcodes.Ast
 {
-    public class Tcode : Code
+    public class Tcode : Code, IEquatable<Tcode>
     {
         public Tcode(int number, Span span, int? line = null) : base(span, line)
         {
@@ -18,7 +18,39 @@ namespace Gcodes.Ast
 
         public override void Accept(IGcodeVisitor visitor)
         {
-            throw new NotImplementedException();
+            visitor.VisitTcode(this);
         }
+
+        #region Equals
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Tcode);
+        }
+
+        public bool Equals(Tcode other)
+        {
+            return other != null &&
+                   base.Equals(other) &&
+                   Number == other.Number;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -2028225194;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + Number.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(Tcode tcode1, Tcode tcode2)
+        {
+            return EqualityComparer<Tcode>.Default.Equals(tcode1, tcode2);
+        }
+
+        public static bool operator !=(Tcode tcode1, Tcode tcode2)
+        {
+            return !(tcode1 == tcode2);
+        } 
+        #endregion
     }
 }

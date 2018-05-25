@@ -91,7 +91,20 @@ namespace Gcodes
 
             var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
             var number = int.Parse(numberTok.Value);
+            var args = ParseArguments();
 
+            var span = args.Aggregate(g.Span.Merge(numberTok.Span), (acc, elem) => acc.Merge(elem.Span));
+
+            if (line != null)
+            {
+                span = span.Merge(line.Span);
+            }
+
+            return new Gcode(number, args, span, line?.Number);
+        }
+
+        private List<Argument> ParseArguments()
+        {
             var args = new List<Argument>();
 
             while (!Finished)
@@ -107,14 +120,7 @@ namespace Gcodes
                 }
             }
 
-            var span = args.Aggregate(g.Span.Merge(numberTok.Span), (acc, elem) => acc.Merge(elem.Span));
-
-            if (line != null)
-            {
-                span = span.Merge(line.Span);
-            }
-
-            return new Gcode(number, args, span, line?.Number);
+            return args;
         }
 
         private Token ParseInteger()
@@ -192,14 +198,29 @@ namespace Gcodes
             return new Ocode(int.Parse(numberTok.Value), span, line?.Number);
         }
 
+        /// <summary>
+        /// Parses a line number (<c>"N50"</c>). If there are multiple 
+        /// consecutive line numbers, this skips to the last line number and
+        /// matches that.
+        /// </summary>
+        /// <returns></returns>
         internal LineNumber ParseLineNumber()
         {
-            var start = index;
+            Token n = null;
+            Token numberTok = null;
 
-            var n = Chomp(TokenKind.N);
-            if (n == null) { return null; }
+            do
+            {
+                n = Chomp(TokenKind.N);
+                if (n == null) break;
 
-            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
+                numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number);
+            } while (Peek()?.Kind == TokenKind.N);
+                
+            if (n == null || numberTok == null)
+            {
+                return null;
+            }
 
             return new LineNumber(int.Parse(numberTok.Value), n.Span.Merge(numberTok.Span));
         }
