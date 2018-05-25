@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Gcodes.Ast
 {
-    public class LineNumber : IEquatable<LineNumber>
+    internal class LineNumber : IEquatable<LineNumber>
     {
         public Span Span { get; }
         public int Number { get; }

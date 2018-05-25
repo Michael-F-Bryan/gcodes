@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Ast\Argument.cs" />
     <Compile Include="Ast\Code.cs" />
-    <Compile Include="Ast\IGcodeVisitor.cs" />
+    <Compile Include="Ast\GcodeVisitor.cs" />
     <Compile Include="Ast\LineNumber.cs" />
     <Compile Include="Ast\Mcode.cs" />
     <Compile Include="Ast\Ocode.cs" />

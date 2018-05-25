@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Gcodes.Ast
 {
+    /// <summary>
+    /// A generic gcode.
+    /// </summary>
     public class Gcode: Code, IEquatable<Gcode>
     {
         private List<Argument> args;
@@ -15,6 +18,21 @@ namespace Gcodes.Ast
             this.args = args;
         }
 
+        /// <summary>
+        /// The kind of gcode this is.
+        /// </summary>
+        public int Number { get; }
+        /// <summary>
+        /// The full list of arguments attached to this gcode.
+        /// </summary>
+        public IReadOnlyList<Argument> Arguments { get => args; }
+
+        /// <summary>
+        /// Get the value for a particular <see cref="ArgumentKind"/>, if the
+        /// argument was specified in this gcode.
+        /// </summary>
+        /// <param name="kind"></param>
+        /// <returns></returns>
         public double? ValueFor(ArgumentKind kind)
         {
             var found = args.Where(arg => arg.Kind == kind);
@@ -29,9 +47,9 @@ namespace Gcodes.Ast
             }
         }
 
-        public override void Accept(IGcodeVisitor visitor)
+        public override void Accept(GcodeVisitor visitor)
         {
-            visitor.VisitGcode(this);
+            visitor.Visit(this);
         }
 
         #region Equals
@@ -56,9 +74,6 @@ namespace Gcodes.Ast
             hashCode = hashCode * -1521134295 + Number.GetHashCode();
             return hashCode;
         }
-
-        public int Number { get; }
-        public IReadOnlyList<Argument> Arguments { get => args; }
 
         public static bool operator ==(Gcode gcode1, Gcode gcode2)
         {

@@ -16,9 +16,9 @@ namespace Gcodes.Ast
 
         public int Number { get; }
 
-        public override void Accept(IGcodeVisitor visitor)
+        public override void Accept(GcodeVisitor visitor)
         {
-            visitor.VisitTcode(this);
+            visitor.Visit(this);
         }
 
         #region Equals

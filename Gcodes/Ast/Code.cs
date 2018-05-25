@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Gcodes.Ast
 {
+    /// <summary>
+    /// The base class all AST nodes in a gcode file inherit from.
+    /// </summary>
     public abstract class Code : IEquatable<Code>
     {
         protected Code(Span span, int? line = null)
@@ -15,10 +18,20 @@ namespace Gcodes.Ast
             Span = span;
         }
 
+        /// <summary>
+        /// The item's line number, if one was supplied.
+        /// </summary>
         public int? Line { get; }
+        /// <summary>
+        /// The item's location within its source text.
+        /// </summary>
         public Span Span { get; }
 
-        public abstract void Accept(IGcodeVisitor visitor);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visitor"></param>
+        public abstract void Accept(GcodeVisitor visitor);
 
         #region Equals
         public override bool Equals(object obj)

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Gcodes.Ast
 {
+    /// <summary>
+    /// A "machine" code, typically used for invoking special machine-specific
+    /// subroutines or actions.
+    /// </summary>
     public class Mcode : Code, IEquatable<Mcode>
     {
         public Mcode(int number, Span span, int? line = null): base(span, line)
@@ -13,9 +17,9 @@ namespace Gcodes.Ast
 
         public int Number { get; }
 
-        public override void Accept(IGcodeVisitor visitor)
+        public override void Accept(GcodeVisitor visitor)
         {
-            visitor.VisitMcode(this);
+            visitor.Visit(this);
         }
 
         #region Equals

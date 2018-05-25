@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Gcodes.Ast
 {
+    /// <summary>
+    /// A single argument, containing both an <see cref="ArgumentKind"/> and
+    /// its corresponding value.
+    /// </summary>
     public class Argument : IEquatable<Argument>
     {
         public Argument(ArgumentKind kind, double value, Span span)
@@ -13,8 +17,17 @@ namespace Gcodes.Ast
             Value = value;
         }
 
+        /// <summary>
+        /// The argument's location in its source text.
+        /// </summary>
         public Span Span { get; }
+        /// <summary>
+        /// Which kind of argument is this?
+        /// </summary>
         public ArgumentKind Kind { get; }
+        /// <summary>
+        /// The argument's value (e.g. feed rate for a <see cref="ArgumentKind.FeedRate"/>).
+        /// </summary>
         public double Value { get; }
 
         #region Equals
@@ -52,6 +65,9 @@ namespace Gcodes.Ast
         #endregion
     }
 
+    /// <summary>
+    /// The various types of gcode arguments.
+    /// </summary>
     public enum ArgumentKind
     {
         X,
