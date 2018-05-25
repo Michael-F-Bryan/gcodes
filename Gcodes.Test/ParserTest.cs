@@ -45,6 +45,18 @@ namespace Gcodes.Test
         }
 
         [Fact]
+        public void TCode()
+        {
+            var src = "N10 T30";
+            var parser = new Parser(src);
+
+            var got = parser.ParseTCode();
+
+            var shouldBe = new Tcode(30, new Span(0, src.Length), 10);
+            Assert.Equal(shouldBe, got);
+        }
+
+        [Fact]
         public void MoreInterestingGcode()
         {
             var src = "G555 X-23.4 F1200 Y-0.0 Z+3.1415";

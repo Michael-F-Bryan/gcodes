@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gcodes.Ast
 {
-    class Ocode: Code
+    public class Ocode: Code
     {
         public Ocode(int programNumber, Span span, int? line = null): base(span, line)
         {
@@ -15,6 +15,10 @@ namespace Gcodes.Ast
         }
 
         public int ProgramNumber { get; }
-        
+
+        public override void Accept(IGcodeVisitor visitor)
+        {
+            visitor.VisitProgramNumber(this);
+        }
     }
 }

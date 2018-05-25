@@ -18,6 +18,8 @@ namespace Gcodes.Ast
         public int? Line { get; }
         public Span Span { get; }
 
+        public abstract void Accept(IGcodeVisitor visitor);
+
         #region Equals
         public override bool Equals(object obj)
         {

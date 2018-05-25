@@ -29,6 +29,11 @@ namespace Gcodes.Ast
             }
         }
 
+        public override void Accept(IGcodeVisitor visitor)
+        {
+            visitor.VisitGcode(this);
+        }
+
         #region Equals
         public override bool Equals(object obj)
         {

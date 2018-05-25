@@ -33,18 +33,34 @@ namespace Gcodes
                 return null;
             }
 
-            var numberTok = ParseInteger();
-            if (numberTok == null)
-            {
-                index = start;
-                return null;
-            }
+            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
 
             var number = int.Parse(numberTok.Value);
             var span = numberTok.Span.Merge(m.Span);
             span = line == null ? span : span.Merge(line.Span);
 
             return new Mcode(number, span, line?.Number);
+        }
+
+        internal Tcode ParseTCode()
+        {
+            var start = index;
+            var line = ParseLineNumber();
+
+            var t = Chomp(TokenKind.T);
+            if (t == null)
+            {
+                index = start;
+                return null;
+            }
+
+            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
+
+            var number = int.Parse(numberTok.Value);
+            var span = numberTok.Span.Merge(t.Span);
+            span = line == null ? span : span.Merge(line.Span);
+
+            return new Tcode(number, span, line?.Number);
         }
 
         /// <summary>
@@ -73,7 +89,7 @@ namespace Gcodes
                 return null;
             }
 
-            var numberTok = ParseInteger();
+            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
             var number = int.Parse(numberTok.Value);
 
             var args = new List<Argument>();
@@ -126,9 +142,7 @@ namespace Gcodes
                 TokenKind.A, TokenKind.B, TokenKind.C);
             if (kindTok == null) return null;
 
-            var valueTok = Chomp(TokenKind.Number);
-            if (valueTok == null)
-                throw ParseError(TokenKind.Number);
+            var valueTok = Chomp(TokenKind.Number) ?? throw ParseError(TokenKind.Number);
 
             var span = kindTok.Span.Merge(valueTok.Span);
             var value = double.Parse(valueTok.Value);
@@ -147,10 +161,10 @@ namespace Gcodes
 
         private Code NextItem()
         {
-            Code got = ParseGCode() ?? ParseMCode() ?? (Code)ParseOCode();
+            Code got = ParseGCode() ?? ParseMCode() ?? ParseTCode() ?? (Code)ParseOCode();
 
             if (got == null)
-                throw ParseError(TokenKind.G, TokenKind.M, TokenKind.O);
+                throw ParseError(TokenKind.G, TokenKind.M, TokenKind.T, TokenKind.O);
 
             return got;
         }
@@ -167,11 +181,7 @@ namespace Gcodes
                 return null;
             }
 
-            var numberTok = ParseInteger();
-            if (numberTok == null)
-            {
-                throw ParseError(TokenKind.Number);
-            }
+            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
 
             var span = O.Span.Merge(numberTok.Span);
             if (line != null)
@@ -189,11 +199,7 @@ namespace Gcodes
             var n = Chomp(TokenKind.N);
             if (n == null) { return null; }
 
-            var numberTok = ParseInteger();
-            if (numberTok == null)
-            {
-                throw ParseError(TokenKind.Number);
-            }
+            var numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number); ;
 
             return new LineNumber(int.Parse(numberTok.Value), n.Span.Merge(numberTok.Span));
         }

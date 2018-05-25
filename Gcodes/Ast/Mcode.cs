@@ -13,6 +13,11 @@ namespace Gcodes.Ast
 
         public int Number { get; }
 
+        public override void Accept(IGcodeVisitor visitor)
+        {
+            visitor.VisitMcode(this);
+        }
+
         #region Equals
         public override bool Equals(object obj)
         {

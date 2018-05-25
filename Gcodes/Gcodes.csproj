@@ -42,9 +42,11 @@
   <ItemGroup>
     <Compile Include="Ast\Argument.cs" />
     <Compile Include="Ast\Code.cs" />
+    <Compile Include="Ast\IGcodeVisitor.cs" />
     <Compile Include="Ast\LineNumber.cs" />
     <Compile Include="Ast\Mcode.cs" />
     <Compile Include="Ast\Ocode.cs" />
+    <Compile Include="Ast\Tcode.cs" />
     <Compile Include="Tokens\TokenKind.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Ast\Gcode.cs" />
