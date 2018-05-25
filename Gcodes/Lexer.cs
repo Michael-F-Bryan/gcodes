@@ -6,6 +6,10 @@ using System.Text.RegularExpressions;
 
 namespace Gcodes
 {
+    /// <summary>
+    /// A tokenizer for converting a stream of characters into a stream of
+    /// <see cref="Token"/>s.
+    /// </summary>
     public class Lexer
     {
         List<Pattern> patterns;
@@ -14,10 +18,18 @@ namespace Gcodes
         int pointer;
         int lineNumber;
 
-        public bool Finished => pointer >= src.Length;
+        internal bool Finished => pointer >= src.Length;
 
+        /// <summary>
+        /// Event fired whenever a comment is encountered.
+        /// </summary>
         public event EventHandler<CommentEventArgs> CommentDetected;
 
+        /// <summary>
+        /// Create a new <see cref="Lexer"/> which will tokenize the provided 
+        /// source text.
+        /// </summary>
+        /// <param name="src"></param>
         public Lexer(string src)
         {
             skips = new List<Regex>
@@ -55,6 +67,10 @@ namespace Gcodes
             };
         }
 
+        /// <summary>
+        /// Start tokenizing the input.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Token> Tokenize()
         {
             while (!Finished)

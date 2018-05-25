@@ -3,6 +3,9 @@ using System;
 
 namespace Gcodes.Tokens
 {
+    /// <summary>
+    /// The various possible kinds of tokens.
+    /// </summary>
     public enum TokenKind
     {
         G,
@@ -26,8 +29,16 @@ namespace Gcodes.Tokens
         S,
     }
 
+    /// <summary>
+    /// Extension methods for the <see cref="Token"/> enum.
+    /// </summary>
     public static class TokenKindExt
     {
+        /// <summary>
+        /// Does this <see cref="TokenKind"/> have a meaningful string value?
+        /// </summary>
+        /// <param name="kind"></param>
+        /// <returns></returns>
         public static bool HasValue(this TokenKind kind)
         {
             switch (kind)
@@ -39,6 +50,16 @@ namespace Gcodes.Tokens
             }
         }
 
+        /// <summary>
+        /// Try to convert the <see cref="TokenKind"/> into an 
+        /// <see cref="ArgumentKind"/>, if applicable.
+        /// </summary>
+        /// <param name="kind"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Raised if there is no corresponding <see cref="ArgumentKind"/> for
+        /// this <see cref="TokenKind"/>.
+        /// </exception>
         public static ArgumentKind AsArgumentKind(this TokenKind kind)
         {
             switch (kind)

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Gcodes
 {
-    public class Pattern
+    internal class Pattern
     {
         Regex regex;
         TokenKind kind;

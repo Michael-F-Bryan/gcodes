@@ -4,9 +4,26 @@ using System.Text;
 
 namespace Gcodes.Tokens
 {
+    /// <summary>
+    /// The smallest atomic unit in a gcode file, containing a token kind,
+    /// the original string, and its location in the source text (as a
+    /// <see cref="Span"/>).
+    /// </summary>
     public class Token : IEquatable<Token>
     {
+        /// <summary>
+        /// Create a new <see cref="Token"/> which doesn't have a useful
+        /// string value (e.g. punctuation).
+        /// </summary>
+        /// <param name="span"></param>
+        /// <param name="kind"></param>
         public Token(Span span, TokenKind kind) : this(span, kind, null) { }
+        /// <summary>
+        /// Create a new <see cref="Token"/> out of its constituent parts.
+        /// </summary>
+        /// <param name="span"></param>
+        /// <param name="kind"></param>
+        /// <param name="value"></param>
         public Token(Span span, TokenKind kind, string value)
         {
             Span = span;
@@ -14,10 +31,21 @@ namespace Gcodes.Tokens
             Value = value;
         }
 
+        /// <summary>
+        /// Where the <see cref="Token"/> lies in its source text.
+        /// </summary>
         public Span Span { get; }
+        /// <summary>
+        /// Which kind of token is this?
+        /// </summary>
         public TokenKind Kind { get; }
+        /// <summary>
+        /// The token's original string text. May be <c>null</c> if the token
+        /// kind doesn't care about its source text.
+        /// </summary>
         public string Value { get; }
 
+        #region Equals
         public override bool Equals(object obj)
         {
             return Equals(obj as Token);
@@ -63,6 +91,7 @@ namespace Gcodes.Tokens
         public static bool operator !=(Token token1, Token token2)
         {
             return !(token1 == token2);
-        }
+        } 
+        #endregion
     }
 }

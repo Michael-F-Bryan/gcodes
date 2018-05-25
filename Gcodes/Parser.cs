@@ -6,17 +6,35 @@ using System.Linq;
 
 namespace Gcodes
 {
+    /// <summary>
+    /// A parser for converting a stream of tokens into their corresponding
+    /// Gcodes and Mcodes.
+    /// </summary>
     public class Parser
     {
         private readonly List<Token> tokens;
         private int index;
 
+        /// <summary>
+        /// Create a new Parser using the provided list of tokens.
+        /// </summary>
+        /// <param name="tokens"></param>
         public Parser(List<Token> tokens)
         {
             this.tokens = tokens ?? throw new ArgumentNullException(nameof(tokens));
             index = 0;
         }
+        /// <summary>
+        /// Create a new <see cref="Parser"/>, automatically invoking the 
+        /// <see cref="Lexer"/> to tokenize the input.
+        /// </summary>
+        /// <param name="src"></param>
+        public Parser(string src) : this(new Lexer(src).Tokenize().ToList()) { }
 
+        /// <summary>
+        /// Is this parser finished?
+        /// </summary>
+        /// <returns></returns>
         public bool GetFinished()
         {
             // being finished can mean one of two things.
@@ -43,10 +61,15 @@ namespace Gcodes
 
             return true;
         }
+        public IEnumerable<Code> Parse()
+        {
+            while (!GetFinished())
+            {
+                yield return NextItem();
+            }
+        }
 
-        public Parser(string src) : this(new Lexer(src).Tokenize().ToList()) { }
-
-        public Mcode ParseMCode()
+        internal Mcode ParseMCode()
         {
             var start = index;
             var line = ParseLineNumber();
@@ -101,7 +124,7 @@ namespace Gcodes
         /// </code>
         /// </remarks>
         /// <returns></returns>
-        public Gcode ParseGCode()
+        internal Gcode ParseGCode()
         {
             var start = index;
 
@@ -126,6 +149,33 @@ namespace Gcodes
             }
 
             return new Gcode(number, args, span, line?.Number);
+        }
+
+        internal Argument ParseArgument()
+        {
+            var kindTok = Chomp(TokenKind.F, TokenKind.P, TokenKind.S, TokenKind.H,
+                TokenKind.X, TokenKind.Y, TokenKind.Z,
+                TokenKind.I, TokenKind.J, TokenKind.K,
+                TokenKind.A, TokenKind.B, TokenKind.C);
+            if (kindTok == null) return null;
+
+            var valueTok = Chomp(TokenKind.Number) ?? throw ParseError(TokenKind.Number);
+
+            var span = kindTok.Span.Merge(valueTok.Span);
+            var value = double.Parse(valueTok.Value);
+            var kind = kindTok.Kind.AsArgumentKind();
+
+            return new Argument(kind, value, span);
+        }
+
+        private Code NextItem()
+        {
+            Code got = ParseGCode() ?? ParseMCode() ?? ParseTCode() ?? (Code)ParseOCode();
+
+            if (got == null)
+                throw ParseError(TokenKind.G, TokenKind.M, TokenKind.T, TokenKind.O);
+
+            return got;
         }
 
         private List<Argument> ParseArguments()
@@ -163,41 +213,6 @@ namespace Gcodes
             }
 
             return numberTok;
-        }
-
-        internal Argument ParseArgument()
-        {
-            var kindTok = Chomp(TokenKind.F, TokenKind.P, TokenKind.S, TokenKind.H,
-                TokenKind.X, TokenKind.Y, TokenKind.Z,
-                TokenKind.I, TokenKind.J, TokenKind.K,
-                TokenKind.A, TokenKind.B, TokenKind.C);
-            if (kindTok == null) return null;
-
-            var valueTok = Chomp(TokenKind.Number) ?? throw ParseError(TokenKind.Number);
-
-            var span = kindTok.Span.Merge(valueTok.Span);
-            var value = double.Parse(valueTok.Value);
-            var kind = kindTok.Kind.AsArgumentKind();
-
-            return new Argument(kind, value, span);
-        }
-
-        public IEnumerable<Code> Parse()
-        {
-            while (!GetFinished())
-            {
-                yield return NextItem();
-            }
-        }
-
-        private Code NextItem()
-        {
-            Code got = ParseGCode() ?? ParseMCode() ?? ParseTCode() ?? (Code)ParseOCode();
-
-            if (got == null)
-                throw ParseError(TokenKind.G, TokenKind.M, TokenKind.T, TokenKind.O);
-
-            return got;
         }
 
         internal Ocode ParseOCode()
