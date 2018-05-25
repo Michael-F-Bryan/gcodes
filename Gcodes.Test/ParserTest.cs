@@ -1,5 +1,6 @@
 ﻿using Gcodes.Ast;
 using Gcodes.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -113,7 +114,6 @@ namespace Gcodes.Test
         [InlineData('a')]
         [InlineData('b')]
         [InlineData('C')]
-        [InlineData('f')]
         [InlineData('P')]
         [InlineData('X')]
         [InlineData('Y')]
@@ -121,13 +121,48 @@ namespace Gcodes.Test
         [InlineData('I')]
         [InlineData('J')]
         [InlineData('K')]
-        public void CharacterIsArgumentKind(char c)
+        [InlineData('S')]
+        [InlineData('H')]
+        public void CharacterIsRecognisedAsArgumentKind(char c)
         {
             var parser = new Parser($"{c}50.0");
 
             var got = parser.ParseArgument();
 
             Assert.NotNull(got);
+            // use reflection to check there's a corresponding argument kind
+            var variants = Enum.GetNames(typeof(ArgumentKind));
+            var variantNameShouldBe = c.ToString().ToUpper();
+            Assert.Contains(variantNameShouldBe, variants);
+        }
+
+        [Fact]
+        public void FeedRateIsArgumentKind()
+        {
+            var parser = new Parser("F1200");
+
+            var got = parser.ParseArgument();
+
+            Assert.NotNull(got);
+            Assert.Equal(ArgumentKind.FeedRate, got.Kind);
+        }
+
+        [Fact]
+        public void AllArgumentKindsCanBeConvertedFromTokens()
+        {
+            var variants = Enum.GetNames(typeof(ArgumentKind))
+                .Where(v => v != "FeedRate"); // feed rate doesn't follow the naming convention
+
+            foreach (var variant in variants)
+            {
+                var tokenKind = (TokenKind) Enum.Parse(typeof(TokenKind), variant);
+                var asArgumentKind = tokenKind.AsArgumentKind();
+
+                var convertedTo = Enum.GetName(typeof(ArgumentKind), asArgumentKind);
+                Assert.Equal(variant, convertedTo);
+            }
+
+            Assert.Equal(ArgumentKind.FeedRate, TokenKind.F.AsArgumentKind());
         }
 
         [Theory]

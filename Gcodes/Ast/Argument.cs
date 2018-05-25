@@ -65,5 +65,7 @@ namespace Gcodes.Ast
         B,
         A,
         P,
+        S,
+        H,
     }
 }

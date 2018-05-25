@@ -142,7 +142,7 @@ namespace Gcodes
 
         internal Argument ParseArgument()
         {
-            var kindTok = Chomp(TokenKind.F, TokenKind.P,
+            var kindTok = Chomp(TokenKind.F, TokenKind.P, TokenKind.S, TokenKind.H,
                 TokenKind.X, TokenKind.Y, TokenKind.Z,
                 TokenKind.I, TokenKind.J, TokenKind.K,
                 TokenKind.A, TokenKind.B, TokenKind.C);

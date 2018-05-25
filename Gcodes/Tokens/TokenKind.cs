@@ -64,8 +64,12 @@ namespace Gcodes.Tokens
                 case TokenKind.K:
                     return ArgumentKind.K;
 
+                case TokenKind.H:
+                    return ArgumentKind.H;
                 case TokenKind.P:
                     return ArgumentKind.P;
+                case TokenKind.S:
+                    return ArgumentKind.S;
                 case TokenKind.F:
                     return ArgumentKind.FeedRate;
                 default:
