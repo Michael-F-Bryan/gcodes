@@ -85,7 +85,7 @@ namespace Gcodes.Test
 
             Assert.Equal(10, got.Number);
             Assert.Equal(new Span(0, 3), got.Span);
-            Assert.True(parser.Finished);
+            Assert.True(parser.GetFinished());
         }
 
         [Theory]
@@ -182,13 +182,22 @@ namespace Gcodes.Test
         [Fact]
         public void IgnoreDuplicateLineNumbers()
         {
-            var src = "N1 N2 N50";
+            var src = "N1 N2 N50 G1";
             var parser = new Parser(src);
 
             var got = parser.ParseLineNumber();
 
             Assert.NotNull(got);
             Assert.Equal(50, got.Number);
+        }
+
+        [Fact]
+        public void ParserIsDoneWhenOnlyLineNumbersAreLeft()
+        {
+            var src = "N1 N2 N3 N4";
+            var parser = new Parser(src);
+
+            Assert.True(parser.GetFinished());
         }
     }
 }

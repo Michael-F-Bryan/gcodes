@@ -17,7 +17,32 @@ namespace Gcodes
             index = 0;
         }
 
-        public bool Finished => index >= tokens.Count;
+        public bool GetFinished()
+        {
+            // being finished can mean one of two things.
+            // either we've run out of input
+            if (index >= tokens.Count)
+                return true;
+
+            // or *everything* to the end of the file will be ignored (e.g. line numbers)
+            // a line number is just a "N" followed by a number, so we just need to make
+            // sure all odd tokens are "N" and the even ones are numbers
+            var tokensLeft = tokens.Count - index;
+            if (tokensLeft % 2 != 0) return false;
+
+            for (int i = index; i < tokens.Count; i += 2)
+            {
+                if (tokens[i].Kind != TokenKind.N)
+                    return false;
+            }
+            for (int j = index + 1; j < tokens.Count; j += 2)
+            {
+                if (tokens[j].Kind != TokenKind.Number)
+                    return false;
+            }
+
+            return true;
+        }
 
         public Parser(string src) : this(new Lexer(src).Tokenize().ToList()) { }
 
@@ -107,7 +132,7 @@ namespace Gcodes
         {
             var args = new List<Argument>();
 
-            while (!Finished)
+            while (!GetFinished())
             {
                 var arg = ParseArgument();
                 if (arg != null)
@@ -159,7 +184,7 @@ namespace Gcodes
 
         public IEnumerable<Code> Parse()
         {
-            while (!Finished)
+            while (!GetFinished())
             {
                 yield return NextItem();
             }
@@ -216,7 +241,7 @@ namespace Gcodes
 
                 numberTok = ParseInteger() ?? throw ParseError(TokenKind.Number);
             } while (Peek()?.Kind == TokenKind.N);
-                
+
             if (n == null || numberTok == null)
             {
                 return null;
