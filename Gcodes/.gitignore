@@ -1,11 +1,5 @@
 
 ###############
-#    folder   #
+#  temp file  #
 ###############
-/**/DROP/
-/**/TEMP/
-/**/packages/
-/**/bin/
-/**/obj/
-_site
-log.txt
+*.yml
