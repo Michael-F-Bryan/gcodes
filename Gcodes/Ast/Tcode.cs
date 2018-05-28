@@ -7,6 +7,9 @@ using Gcodes.Tokens;
 
 namespace Gcodes.Ast
 {
+    /// <summary>
+    /// An tool change instruction.
+    /// </summary>
     public class Tcode : Code, IEquatable<Tcode>
     {
         public Tcode(int number, Span span, int? line = null) : base(span, line)
@@ -16,7 +19,7 @@ namespace Gcodes.Ast
 
         public int Number { get; }
 
-        public override void Accept(GcodeVisitor visitor)
+        public override void Accept(IGcodeVisitor visitor)
         {
             visitor.Visit(this);
         }

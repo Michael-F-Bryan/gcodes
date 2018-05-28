@@ -31,7 +31,7 @@ namespace Gcodes.Ast
         /// 
         /// </summary>
         /// <param name="visitor"></param>
-        public abstract void Accept(GcodeVisitor visitor);
+        public abstract void Accept(IGcodeVisitor visitor);
 
         #region Equals
         public override bool Equals(object obj)

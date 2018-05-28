@@ -47,7 +47,7 @@ namespace Gcodes.Ast
             }
         }
 
-        public override void Accept(GcodeVisitor visitor)
+        public override void Accept(IGcodeVisitor visitor)
         {
             visitor.Visit(this);
         }

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Gcodes.Ast
 {
     /// <summary>
-    /// A base class which can be used to inspect gcodes at runtime using
+    /// An object which can be used to inspect gcodes at runtime using
     /// the visitor pattern.
     /// </summary>
-    public class GcodeVisitor
+    public interface IGcodeVisitor
     {
-        public virtual void Visit(Gcode code) { }
-        public virtual void Visit(Mcode code) { }
-        public virtual void Visit(Tcode tcode) { }
-        public virtual void Visit(Ocode code) { }
+        void Visit(Gcode code);
+        void Visit(Mcode code);
+        void Visit(Tcode tcode);
+        void Visit(Ocode code);
     }
 }

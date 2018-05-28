@@ -17,7 +17,7 @@ namespace Gcodes.Ast
 
         public int Number { get; }
 
-        public override void Accept(GcodeVisitor visitor)
+        public override void Accept(IGcodeVisitor visitor)
         {
             visitor.Visit(this);
         }
