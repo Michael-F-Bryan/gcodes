@@ -10,6 +10,7 @@ namespace Gcodes.Ast
     /// <summary>
     /// The base class all AST nodes in a gcode file inherit from.
     /// </summary>
+    [Serializable]
     public abstract class Code : IEquatable<Code>
     {
         protected Code(Span span, int? line = null)

@@ -8,6 +8,7 @@ namespace Gcodes.Ast
     /// <summary>
     /// A generic gcode.
     /// </summary>
+    [Serializable]
     public class Gcode: Code, IEquatable<Gcode>
     {
         private List<Argument> args;

@@ -53,6 +53,7 @@
     <Compile Include="Runtime\Emulator.cs" />
     <Compile Include="Runtime\IOperation.cs" />
     <Compile Include="Runtime\MachineState.cs" />
+    <Compile Include="Runtime\Noop.cs" />
     <Compile Include="Runtime\OperationFactory.cs" />
     <Compile Include="Tokens\TokenKind.cs" />
     <Compile Include="Exceptions.cs" />

@@ -11,10 +11,23 @@ namespace Gcodes.Runtime
     {
         public virtual IOperation GcodeOp(Gcode code, MachineState initialState)
         {
+            Exception ex;
+
             switch (code.Number)
             {
+                case 17:
+                    return new Noop(initialState);
+                case 4:
+                    var ms = code.ValueFor(ArgumentKind.P);
+                    if (ms == null)
+                    {
+                        ex = new ArgumentException("Dwell commands require a P argument");
+                        ex.Data[nameof(code)] = code;
+                        throw ex;
+                    }
+                    return new Noop(initialState, TimeSpan.FromMilliseconds(ms.Value));
                 default:
-                    var ex = new UnknownGcodeException($"No applicable operation for G{code.Number}");
+                    ex = new UnknownGcodeException($"No applicable operation for G{code.Number}");
                     ex.Data[nameof(code)] = code;
                     throw ex;
             }
