@@ -17,8 +17,9 @@ environment:
 
 on_success:
   # First we need to generate the docs
-  - .\packages\docfx.console.*\tools\docfx.exe metadata .\Gcodes\docfx.json
-  - .\packages\docfx.console.*\tools\docfx.exe build .\Gcodes\docfx.json
+  - dir .\packages
+  - ps: .\packages\docfx.console.*\tools\docfx.exe metadata .\Gcodes\docfx.json
+  - ps: .\packages\docfx.console.*\tools\docfx.exe build .\Gcodes\docfx.json
   # Set up git
   - git config --global credential.helper store
   - ps: Add-Content "$env:USERPROFILE.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com"
