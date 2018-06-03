@@ -11,3 +11,20 @@ build:
 
 before_build:
   - nuget restore
+
+environment:
+  access_token: "UPDATE_ME"
+
+on_success:
+  # First we need to generate the docs
+  - .\packages\docfx.console.*\tools\docfx.exe metadata .\Gcodes\docfx.json
+  - .\packages\docfx.console.*\tools\docfx.exe build .\Gcodes\docfx.json
+  # Set up git
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com"
+  - git config --global user.email michaelfbryan@gmail.com
+  - git config --global user.name Michael-F-Bryan
+  # Then add it to git and push
+  - git add --force Gcodes\_site 
+  - git commit -am "Updated API docs"
+  - git subtree push --prefix Gcodes\_site origin gh-pages
