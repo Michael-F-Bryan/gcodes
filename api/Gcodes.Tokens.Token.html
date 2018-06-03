@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Token
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Token
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Gcodes.Tokens.Token">
+  
+  
+  <h1 id="Gcodes_Tokens_Token" data-uid="Gcodes.Tokens.Token" class="text-break">Class Token
+  </h1>
+  <div class="markdown level0 summary"><p>The smallest atomic unit in a gcode file, containing a token kind,
+the original string, and its location in the source text (as a
+<a class="xref" href="Gcodes.Tokens.Token.html#Gcodes_Tokens_Token_Span">Span</a>).</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Token</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Gcodes.Tokens.Token.html">Token</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Gcodes.Tokens.html">Gcodes.Tokens</a></h6>
+  <h6><strong>Assembly</strong>: Gcodes.dll</h6>
+  <h5 id="Gcodes_Tokens_Token_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Token : IEquatable&lt;Token&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token__ctor_Gcodes_Tokens_Span_Gcodes_Tokens_TokenKind_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.%23ctor(Gcodes.Tokens.Span%2CGcodes.Tokens.TokenKind)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L20">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token__ctor_" data-uid="Gcodes.Tokens.Token.#ctor*"></a>
+  <h4 id="Gcodes_Tokens_Token__ctor_Gcodes_Tokens_Span_Gcodes_Tokens_TokenKind_" data-uid="Gcodes.Tokens.Token.#ctor(Gcodes.Tokens.Span,Gcodes.Tokens.TokenKind)">Token(Span, TokenKind)</h4>
+  <div class="markdown level1 summary"><p>Create a new <a class="xref" href="Gcodes.Tokens.Token.html">Token</a> which doesn&apos;t have a useful
+string value (e.g. punctuation).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Token(Span span, TokenKind kind)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Span.html">Span</a></td>
+        <td><span class="parametername">span</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.TokenKind.html">TokenKind</a></td>
+        <td><span class="parametername">kind</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token__ctor_Gcodes_Tokens_Span_Gcodes_Tokens_TokenKind_System_String_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.%23ctor(Gcodes.Tokens.Span%2CGcodes.Tokens.TokenKind%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L27">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token__ctor_" data-uid="Gcodes.Tokens.Token.#ctor*"></a>
+  <h4 id="Gcodes_Tokens_Token__ctor_Gcodes_Tokens_Span_Gcodes_Tokens_TokenKind_System_String_" data-uid="Gcodes.Tokens.Token.#ctor(Gcodes.Tokens.Span,Gcodes.Tokens.TokenKind,System.String)">Token(Span, TokenKind, String)</h4>
+  <div class="markdown level1 summary"><p>Create a new <a class="xref" href="Gcodes.Tokens.Token.html">Token</a> out of its constituent parts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Token(Span span, TokenKind kind, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Span.html">Span</a></td>
+        <td><span class="parametername">span</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.TokenKind.html">TokenKind</a></td>
+        <td><span class="parametername">kind</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_Kind.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.Kind%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L41">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_Kind_" data-uid="Gcodes.Tokens.Token.Kind*"></a>
+  <h4 id="Gcodes_Tokens_Token_Kind" data-uid="Gcodes.Tokens.Token.Kind">Kind</h4>
+  <div class="markdown level1 summary"><p>Which kind of token is this?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TokenKind Kind { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.TokenKind.html">TokenKind</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_Span.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.Span%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L37">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_Span_" data-uid="Gcodes.Tokens.Token.Span*"></a>
+  <h4 id="Gcodes_Tokens_Token_Span" data-uid="Gcodes.Tokens.Token.Span">Span</h4>
+  <div class="markdown level1 summary"><p>Where the <a class="xref" href="Gcodes.Tokens.Token.html">Token</a> lies in its source text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Span Span { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Span.html">Span</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_Value.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L46">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_Value_" data-uid="Gcodes.Tokens.Token.Value*"></a>
+  <h4 id="Gcodes_Tokens_Token_Value" data-uid="Gcodes.Tokens.Token.Value">Value</h4>
+  <div class="markdown level1 summary"><p>The token&apos;s original string text. May be <code>null</code> if the token
+kind doesn&apos;t care about its source text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Value { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_Equals_Gcodes_Tokens_Token_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.Equals(Gcodes.Tokens.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L54">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_Equals_" data-uid="Gcodes.Tokens.Token.Equals*"></a>
+  <h4 id="Gcodes_Tokens_Token_Equals_Gcodes_Tokens_Token_" data-uid="Gcodes.Tokens.Token.Equals(Gcodes.Tokens.Token)">Equals(Token)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(Token other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Token.html">Token</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L49">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_Equals_" data-uid="Gcodes.Tokens.Token.Equals*"></a>
+  <h4 id="Gcodes_Tokens_Token_Equals_System_Object_" data-uid="Gcodes.Tokens.Token.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_GetHashCode.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L62">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_GetHashCode_" data-uid="Gcodes.Tokens.Token.GetHashCode*"></a>
+  <h4 id="Gcodes_Tokens_Token_GetHashCode" data-uid="Gcodes.Tokens.Token.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_ToString.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L71">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_ToString_" data-uid="Gcodes.Tokens.Token.ToString*"></a>
+  <h4 id="Gcodes_Tokens_Token_ToString" data-uid="Gcodes.Tokens.Token.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_op_Equality_Gcodes_Tokens_Token_Gcodes_Tokens_Token_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.op_Equality(Gcodes.Tokens.Token%2CGcodes.Tokens.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L86">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_op_Equality_" data-uid="Gcodes.Tokens.Token.op_Equality*"></a>
+  <h4 id="Gcodes_Tokens_Token_op_Equality_Gcodes_Tokens_Token_Gcodes_Tokens_Token_" data-uid="Gcodes.Tokens.Token.op_Equality(Gcodes.Tokens.Token,Gcodes.Tokens.Token)">Equality(Token, Token)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(Token token1, Token token2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Token.html">Token</a></td>
+        <td><span class="parametername">token1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Token.html">Token</a></td>
+        <td><span class="parametername">token2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token_op_Inequality_Gcodes_Tokens_Token_Gcodes_Tokens_Token_.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token.op_Inequality(Gcodes.Tokens.Token%2CGcodes.Tokens.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L91">View Source</a>
+  </span>
+  <a id="Gcodes_Tokens_Token_op_Inequality_" data-uid="Gcodes.Tokens.Token.op_Inequality*"></a>
+  <h4 id="Gcodes_Tokens_Token_op_Inequality_Gcodes_Tokens_Token_Gcodes_Tokens_Token_" data-uid="Gcodes.Tokens.Token.op_Inequality(Gcodes.Tokens.Token,Gcodes.Tokens.Token)">Inequality(Token, Token)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(Token token1, Token token2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Token.html">Token</a></td>
+        <td><span class="parametername">token1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Gcodes.Tokens.Token.html">Token</a></td>
+        <td><span class="parametername">token2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Michael-F-Bryan/gcodes/new/master/apiSpec/new?filename=Gcodes_Tokens_Token.md&amp;value=---%0Auid%3A%20Gcodes.Tokens.Token%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Michael-F-Bryan/gcodes/blob/master/Gcodes/Tokens/Token.cs/#L12" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

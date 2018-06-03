@@ -1,0 +1,500 @@
+{
+  "homepages": [],
+  "source_base_path": "F:/Projects/Gcode/Gcodes",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "c4BbBBEYt/di7QTo/49zzA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "qZlI6kLhHNnZYUtu/3lHGA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "xVlQaX7Tk85omoiWv3O+Ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "Thd4PKc8Dz6kw4uvx+EKHw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Argument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Argument.html",
+          "hash": "pFFODl4DuSsZJFjnpVmUzA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.ArgumentKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.ArgumentKind.html",
+          "hash": "I0sCXqf1x0GBVlmlc7GdzA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Code.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Code.html",
+          "hash": "2aT0qyXXIr6+wcFFk/aCSg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Gcode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Gcode.html",
+          "hash": "4CKR5SyW09wrE9UP5lsiCg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.IGcodeVisitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.IGcodeVisitor.html",
+          "hash": "No0Ap5kd1RohlXNHW+8x7Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Mcode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Mcode.html",
+          "hash": "A7v9yM6OYFnzS2DP+1hmXg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Ocode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Ocode.html",
+          "hash": "R/BJeqTC4TnGUOlzxfWUCQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.Tcode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.Tcode.html",
+          "hash": "9f69l6KY0LzUwobcj3F89Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Ast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Ast.html",
+          "hash": "Ux7zsXO1E4TmzGJT4GEtEA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.CommentEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.CommentEventArgs.html",
+          "hash": "ex2AgUq6zWy/6I7Ll248HQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.GcodeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.GcodeException.html",
+          "hash": "FykNzBLYGRwcEVtG0TsKJw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Interpreter.html",
+          "hash": "b6tb4lyLx7+e3FdvHpGDdw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Lexer.html",
+          "hash": "7MEGKUp+mvPEBP5by3Rb1Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.ParseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.ParseException.html",
+          "hash": "+q5PfGwhcvy7YFjrqdl9WA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Parser.html",
+          "hash": "gxj7tdwOX049XLBj7GdYvQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.Emulator.StateChangeEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.Emulator.StateChangeEventArgs.html",
+          "hash": "R1x9U7ottTQ1Jt5YX8LNxg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.Emulator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.Emulator.html",
+          "hash": "0Ga6YplFj05Laq9WJV9SCw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.IOperation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.IOperation.html",
+          "hash": "M7Xxi6bN2nRTSBJxmoJlag=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.MachineState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.MachineState.html",
+          "hash": "5bK5O0HfnFcQXndqeaJU6A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.Noop.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.Noop.html",
+          "hash": "6gv58Nd39Tv8d7eVj3HwkQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.OperationFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.OperationFactory.html",
+          "hash": "Hm6hmRaiiFcrEacvKOyiCQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Runtime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Runtime.html",
+          "hash": "tndWayaiGV4iQqj2AlttfA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Tokens.Span.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Tokens.Span.html",
+          "hash": "0WXdswwhWLQB5bSTEvCnbg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Tokens.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Tokens.Token.html",
+          "hash": "gIHLELmGY7tBgCFj2FwYCQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Tokens.TokenKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Tokens.TokenKind.html",
+          "hash": "0vGCinRaSiRIO6lyoXCsNQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Tokens.TokenKindExt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Tokens.TokenKindExt.html",
+          "hash": "7qmIjhgtu7n6WrthNP639A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.Tokens.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.Tokens.html",
+          "hash": "HabW+S3dm1nWAXGIdCvMsw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.UnexpectedEOFException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.UnexpectedEOFException.html",
+          "hash": "qshzqqTtqMQYrm58DdtLYQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.UnexpectedTokenException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.UnexpectedTokenException.html",
+          "hash": "7VNPhuiMWTMNgX/96NUr2A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.UnknownGcodeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.UnknownGcodeException.html",
+          "hash": "bTZyyZu27YJZDmCphOI98Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.UnrecognisedCharacterException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.UnrecognisedCharacterException.html",
+          "hash": "NAKc6FbX9in07ZUGXCGf1Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Gcodes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Gcodes.html",
+          "hash": "K9GELWIcmDGsU6ZCd61Ysw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "zw5sMQng01SvcGMZyXja0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "frPdeW5hGroGiyexwMQIhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
