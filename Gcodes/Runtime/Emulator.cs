@@ -11,15 +11,16 @@ namespace Gcodes.Runtime
     {
         private MachineState state;
         private double time;
-        protected OperationFactory operations = new OperationFactory();
+        private OperationFactory operations;
 
         public event EventHandler<StateChangeEventArgs> StateChanged;
 
-        public Emulator() : this(new MachineState()) { }
-        public Emulator(MachineState InitialState)
+        public Emulator() : this(new MachineState(), new OperationFactory()) { }
+        public Emulator(MachineState InitialState, OperationFactory operations)
         {
             State = InitialState;
             time = 0;
+            this.operations = operations;
         }
 
         public MachineState State

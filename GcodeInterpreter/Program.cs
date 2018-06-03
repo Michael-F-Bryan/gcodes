@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using CommandLine.Text;
 using Gcodes;
+using Gcodes.Runtime;
 using Gcodes.Tokens;
 using Serilog;
 using Serilog.Events;
@@ -16,10 +17,11 @@ namespace GcodeInterpreter
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            var result = CommandLine.Parser.Default.ParseArguments<Options>(args)
-                .MapResult(opts => Run(opts), _ => 1);
+            var parsedArgs = CommandLine.Parser.Default.ParseArguments<Options>(args);
+
+            return parsedArgs.MapResult(opts => Run(opts), _ => 1);
         }
 
         private static void Initializelogger(Options opts)
@@ -42,8 +44,8 @@ namespace GcodeInterpreter
                 Log.Debug("Reading {Filename}", opts.InputFile);
                 var src = File.ReadAllText(opts.InputFile);
 
-                var vm = new Interpreter(src);
-                vm.Run();
+                var vm = new Emulator();
+                vm.Run(src);
             }
             catch (Exception ex)
             {

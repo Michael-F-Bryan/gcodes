@@ -9,11 +9,11 @@ namespace Gcodes.Ast
     /// A generic gcode.
     /// </summary>
     [Serializable]
-    public class Gcode: Code, IEquatable<Gcode>
+    public class Gcode : Code, IEquatable<Gcode>
     {
         private List<Argument> args;
 
-        public Gcode(int number, List<Argument> args, Span span, int? line = null): base(span, line)
+        public Gcode(int number, List<Argument> args, Span span, int? line = null) : base(span, line)
         {
             Number = number;
             this.args = args;
@@ -46,6 +46,11 @@ namespace Gcodes.Ast
             {
                 return null;
             }
+        }
+
+        public double? ValueFor(params ArgumentKind[] kinds)
+        {
+            return kinds.Select(kind => ValueFor(kind)).Where(kind => kind != null).FirstOrDefault();
         }
 
         public override void Accept(IGcodeVisitor visitor)
@@ -84,7 +89,7 @@ namespace Gcodes.Ast
         public static bool operator !=(Gcode gcode1, Gcode gcode2)
         {
             return !(gcode1 == gcode2);
-        } 
+        }
         #endregion
     }
 }
