@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Gcodes.Tokens;
 using Xunit;
 
 namespace Gcodes.Test
@@ -62,6 +58,20 @@ namespace Gcodes.Test
             var map = new FileMap(src);
 
             var got = map.LineNumber(index);
+
+            Assert.Equal(shouldBe, got);
+        }
+
+        [Theory]
+        [InlineData(1, 5, "ab\r\ncdef\r\nghij\n", "b\r\nc")]
+        [InlineData(0, 2, "ab\r\ncdef\r\nghij\n", "ab")]
+        public void GetSpanInfo(int start, int end, string src, string value)
+        {
+            var map = new FileMap(src);
+            var span = new Span(start, end);
+            var shouldBe = new SpanInfo(span, map.LocationFor(start), map.LocationFor(end), value);
+            
+            var got = map.SpanInfoFor(span);
 
             Assert.Equal(shouldBe, got);
         }

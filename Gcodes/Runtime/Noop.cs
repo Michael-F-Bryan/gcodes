@@ -32,6 +32,14 @@ namespace Gcodes.Runtime
                    Duration.Equals(other.Duration);
         }
 
+        public override int GetHashCode()
+        {
+            var hashCode = -465428333;
+            hashCode = hashCode * -1521134295 + EqualityComparer<MachineState>.Default.GetHashCode(state);
+            hashCode = hashCode * -1521134295 + EqualityComparer<TimeSpan>.Default.GetHashCode(Duration);
+            return hashCode;
+        }
+
         public MachineState NextState(TimeSpan deltaTime)
         {
             throw new NotImplementedException();

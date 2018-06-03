@@ -21,6 +21,7 @@ namespace Gcodes.Tokens
         /// The index <b>one after</b> the end of the selected text.
         /// </summary>
         public int End { get; }
+        public int Length { get => End - Start; }
 
         public Span(int start, int end)
         {

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gcodes
 {
@@ -13,10 +11,11 @@ namespace Gcodes
     public class FileMap
     {
         private SortedDictionary<int, Location> locations = new SortedDictionary<int, Location>();
+        private Dictionary<Span, SpanInfo> spans = new Dictionary<Span, SpanInfo>();
         private string src;
         private readonly bool usesCrLf;
 
-        public string LineEnding { get => usesCrLf ? "\r\n" : "\n"; }
+        private string LineEnding { get => usesCrLf ? "\r\n" : "\n"; }
 
         public FileMap(string src)
         {
@@ -24,11 +23,33 @@ namespace Gcodes
             usesCrLf = src.Contains("\r\n");
         }
 
+        /// <summary>
+        /// Get information associated with the provided span.
+        /// </summary>
+        /// <param name="span"></param>
+        /// <returns></returns>
+        public SpanInfo SpanInfoFor(Span span)
+        {
+            if (!spans.TryGetValue(span, out SpanInfo info))
+            {
+                info = spans[span] = CalculateSpanInfo(span);
+            }
+
+            return info;
+        }
+
+        private SpanInfo CalculateSpanInfo(Span span)
+        {
+            var start = LocationFor(span.Start);
+            var end = LocationFor(span.End);
+            var value = src.Substring(span.Start, span.Length);
+
+            return new SpanInfo(span, start, end, value);
+        }
+
         public Location LocationFor(int byteIndex)
         {
-            locations.TryGetValue(byteIndex, out Location location);
-
-            if (location == null)
+            if (!locations.TryGetValue(byteIndex, out Location location))
             {
                 location = locations[byteIndex] = CalculateLocation(byteIndex);
             }
