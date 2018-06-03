@@ -7,12 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcodes", "Gcodes\Gcodes.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcodes.Test", "Gcodes.Test\Gcodes.Test.csproj", "{8EB51AC3-86B9-462E-AA48-1CC48E3D6129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GcodeInterpreter", "GcodeInterpreter\GcodeInterpreter.csproj", "{BC78987C-B98A-4CD1-A44F-D6CE48A265F0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EFE7E16-B267-4FD8-AF57-2972CCC40C63}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gcodes.Console", "Gcodes.Console\Gcodes.Console.csproj", "{BC78987C-B98A-4CD1-A44F-D6CE48A265F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,19 +1,12 @@
 ﻿using CommandLine;
-using CommandLine.Text;
-using Gcodes;
 using Gcodes.Runtime;
-using Gcodes.Tokens;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GcodeInterpreter
+namespace Gcodes.Console
 {
     class Program
     {

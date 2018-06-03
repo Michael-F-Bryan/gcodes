@@ -4,11 +4,16 @@
 
 A basic C# gcode parser and interpreter.
 
-# Getting Started
+## Getting Started
 
 Once you've downloaded a copy of the repository (e.g. as a git submodule), you
 should be able to start using the `gcodes` library by asking Visual Studio to
 add a reference to it.
+
+### Analysing Gcode Programs
+
+If you just want to inspect a gcode program without doing any simulation you
+just need to run the `Parser` and inspect its output.
 
 Parsing the input text takes place in two steps:
 
@@ -25,7 +30,9 @@ public static void ParseGcodeFile(string filename) {
 	List<Token> tokens = lexer.Tokenize().ToList();
 
 	var parser = new Parser(tokens);
-	List<Gcode> gcodes = parser.Parse().ToList();
+	List<Code> gcodes = parser.Parse().ToList();
+
+	// do something with the gcodes
 }
 ```
 
@@ -36,3 +43,5 @@ There is no guarantee that every argument is provided to a gcode, therefore
 if you want to fetch an argument's value (e.g. `X` or feed rate) you can use
 the `ValueFor()` method. This will search the arguments provided to a particular
 gcode for the specified `ArgumentKind`, and return its value. 
+
+### Simulating A CNC Machine
