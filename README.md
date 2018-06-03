@@ -1,5 +1,7 @@
 # Gcodes
 
+[![Build status](https://ci.appveyor.com/api/projects/status/b4t1cp42205pdqta?svg=true)](https://ci.appveyor.com/project/Michael-F-Bryan/gcodes)
+
 A basic C# gcode parser and interpreter.
 
 # Getting Started

@@ -1,0 +1,11 @@
+cache:
+  - packages -> **\packages.config
+
+configuration: Debug
+
+build:
+  parallel: true
+  project: 
+
+before_build:
+  - nuget restore
