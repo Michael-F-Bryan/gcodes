@@ -37,7 +37,7 @@ namespace Gcodes.Console
                 Log.Debug("Reading {Filename}", opts.InputFile);
                 var src = File.ReadAllText(opts.InputFile);
 
-                var vm = new Emulator();
+                var vm = new LoggingEmulator();
                 vm.Run(src);
             }
             catch (Exception ex)
