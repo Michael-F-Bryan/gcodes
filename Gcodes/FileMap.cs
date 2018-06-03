@@ -44,7 +44,7 @@ namespace Gcodes
             return new Location(byteIndex, line, column);
         }
 
-        private int ColumnNumber(int byteIndex)
+        internal int ColumnNumber(int byteIndex)
         {
             var lastNewline = src.LastIndexOf(LineEnding, byteIndex);
 
@@ -69,17 +69,18 @@ namespace Gcodes
             var currentIndex = closestLocation?.ByteIndex ?? 0;
             var currentLine = closestLocation?.Line ?? 0;
 
-            while (currentIndex < byteIndex)
+            do
             {
+                currentLine += 1;
+
                 var nextNewLine = src.IndexOf(LineEnding, currentIndex);
-                if (nextNewLine < 0)
+                if (nextNewLine < 0 || nextNewLine > byteIndex)
                 {
                     break;
                 }
 
-                currentLine += 1;
                 currentIndex = nextNewLine + 1;
-            }
+            } while (currentIndex < byteIndex);
 
             return currentLine;
         }
