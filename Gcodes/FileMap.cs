@@ -13,14 +13,11 @@ namespace Gcodes
         private SortedDictionary<int, Location> locations = new SortedDictionary<int, Location>();
         private Dictionary<Span, SpanInfo> spans = new Dictionary<Span, SpanInfo>();
         private string src;
-        private readonly bool usesCrLf;
 
-        private string LineEnding { get => usesCrLf ? "\r\n" : "\n"; }
 
         public FileMap(string src)
         {
             this.src = src ?? throw new ArgumentNullException(nameof(src));
-            usesCrLf = src.Contains("\r\n");
         }
 
         /// <summary>
@@ -59,7 +56,9 @@ namespace Gcodes
 
         private Location CalculateLocation(int byteIndex)
         {
-            var line = LineNumber(byteIndex);
+            var closestLocation = locations.Values.Where(loc => loc.ByteIndex < byteIndex).LastOrDefault();
+
+            var line = LineNumber(byteIndex, closestLocation);
             var column = ColumnNumber(byteIndex);
 
             return new Location(byteIndex, line, column);
@@ -67,43 +66,38 @@ namespace Gcodes
 
         internal int ColumnNumber(int byteIndex)
         {
-            var lastNewline = src.LastIndexOf(LineEnding, byteIndex);
+            var lastNewline = src.LastIndexOf('\n', byteIndex);
+            var col = lastNewline < 0 ? byteIndex + 1 : byteIndex - lastNewline;
 
-            if (lastNewline < 0)
-            {
-                return byteIndex + 1;
-            }
-            else
-            {
-                var startOfLine = lastNewline + LineEnding.Length;
-                int column = byteIndex - startOfLine;
-                // one-based index
-                column += 1;
-                return column;
-            }
+            return col;
         }
 
-        internal int LineNumber(int byteIndex)
+        internal int LineNumber(int byteIndex, Location closest = null)
         {
-            var closestLocation = locations.Values.Where(loc => loc.ByteIndex < byteIndex).LastOrDefault();
+            var line = NaiveLineNumber(src, byteIndex, closest?.ByteIndex ?? 0);
 
-            var currentIndex = closestLocation?.ByteIndex ?? 0;
-            var currentLine = closestLocation?.Line ?? 0;
-
-            do
+            if (closest != null)
             {
-                currentLine += 1;
+                line += closest.Line - 1;
+            }
 
-                var nextNewLine = src.IndexOf(LineEnding, currentIndex);
-                if (nextNewLine < 0 || nextNewLine > byteIndex)
+            return line;
+        }
+
+        private int NaiveLineNumber(string src, int byteIndex, int startIndex = 0)
+        {
+            var line = 1;
+
+            for (int index = startIndex; index < byteIndex; index++)
+            {
+                var c = src[index];
+                if (c == '\n')
                 {
-                    break;
+                    line += 1;
                 }
+            }
 
-                currentIndex = nextNewLine + 1;
-            } while (currentIndex < byteIndex);
-
-            return currentLine;
+            return line;
         }
     }
 }
