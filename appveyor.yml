@@ -27,5 +27,5 @@ on_success:
   - git config --global user.name Michael-F-Bryan
   # Then add it to git and push
   - git add --force Gcodes\_site 
-  - git commit -am "Updated API docs"
+  - ps: git commit -am "Updated API docs at $(Get-Date -Format g)"
   - git subtree push --prefix Gcodes\_site origin gh-pages
