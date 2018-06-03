@@ -11,16 +11,16 @@ namespace Gcodes.Runtime
     {
         private MachineState state;
         private double time;
-        private OperationFactory operations;
+        public OperationFactory Operations { get; set; } = new OperationFactory();
 
         public event EventHandler<StateChangeEventArgs> StateChanged;
+        public event EventHandler<OperationExecutedEventArgs> OperationExecuted;
 
-        public Emulator() : this(new MachineState(), new OperationFactory()) { }
-        public Emulator(MachineState InitialState, OperationFactory operations)
+        public Emulator() : this(new MachineState()) { }
+        public Emulator(MachineState InitialState)
         {
             State = InitialState;
             time = 0;
-            this.operations = operations;
         }
 
         public MachineState State
@@ -47,8 +47,19 @@ namespace Gcodes.Runtime
 
         public override void Visit(Gcode code)
         {
-            var operation = operations.GcodeOp(code, State);
-            ExecuteOperation(operation);
+            var operation = Operations.GcodeOp(code, State);
+
+            if (operation != null)
+            {
+                ExecuteOperation(operation);
+            }
+
+            OnOperationExecuted(operation, code);
+        }
+
+        private void OnOperationExecuted(IOperation operation, Code code)
+        {
+            OperationExecuted?.Invoke(this, new OperationExecutedEventArgs(operation, code));
         }
 
         private void ExecuteOperation(IOperation operation)
@@ -95,6 +106,18 @@ namespace Gcodes.Runtime
 
             public MachineState NewState { get; }
             public double Time { get; }
+        }
+
+        public class OperationExecutedEventArgs : EventArgs
+        {
+            public OperationExecutedEventArgs(IOperation operation, Code code)
+            {
+                Operation = operation;
+                Code = code;
+            }
+
+            public Code Code { get; }
+            public IOperation Operation { get; }
         }
     }
 }

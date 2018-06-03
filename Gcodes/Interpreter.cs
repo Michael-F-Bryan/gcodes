@@ -1,5 +1,6 @@
 ﻿using Gcodes.Ast;
 using Gcodes.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,23 @@ namespace Gcodes
         private FileMap map;
 
         /// <summary>
+        /// Callback fired whenever a comment is encountered during the 
+        /// tokenizing process.
+        /// </summary>
+        public event EventHandler<CommentEventArgs> CommentDetected;
+        /// <summary>
+        /// Callback fired immediately before the interpreter starts executing
+        /// gcodes.
+        /// </summary>
+        /// <param name="codes"></param>
+        public event EventHandler<List<Code>> BeforeRun;
+        /// <summary>
+        /// Callback fired before the token stream is parsed.
+        /// </summary>
+        /// <param name="tokens"></param>
+        public event EventHandler<List<Token>> BeforeParse;
+
+        /// <summary>
         /// <para>
         /// Tokenize, parse, then execute a gcode program. 
         /// </para>
@@ -34,7 +52,7 @@ namespace Gcodes
         {
             map = new FileMap(src);
             var lexer = new Lexer(src);
-            lexer.CommentDetected += (s, e) => CommentDetected(e);
+            lexer.CommentDetected += OnCommentDetected;
 
             var tokens = lexer.Tokenize().ToList();
             Run(tokens);
@@ -46,7 +64,7 @@ namespace Gcodes
         /// <param name="tokens"></param>
         public void Run(List<Token> tokens)
         {
-            BeforeParse(tokens);
+            OnBeforeParse(tokens);
             var parser = new Parser(tokens);
             var codes = parser.Parse().ToList();
             Run(codes);
@@ -58,7 +76,7 @@ namespace Gcodes
         /// <param name="codes"></param>
         public void Run(List<Code> codes)
         {
-            BeforeRun(codes);
+            OnBeforeRun(codes);
             running = true;
 
             try
@@ -115,22 +133,18 @@ namespace Gcodes
         public virtual void Visit(Tcode tcode) { }
         public virtual void Visit(Ocode code) { }
 
-        /// <summary>
-        /// Callback fired before the token stream is parsed.
-        /// </summary>
-        /// <param name="tokens"></param>
-        protected virtual void BeforeParse(List<Token> tokens) { }
-        /// <summary>
-        /// Callback fired immediately before the interpreter starts executing
-        /// gcodes.
-        /// </summary>
-        /// <param name="codes"></param>
-        protected virtual void BeforeRun(List<Code> codes) { }
-        /// <summary>
-        /// Callback fired whenever a comment is encountered during the 
-        /// tokenizing process.
-        /// </summary>
-        /// <param name="e"></param>
-        protected virtual void CommentDetected(CommentEventArgs e) { }
+        private void OnBeforeParse(List<Token> tokens) {
+            BeforeParse?.Invoke(this, tokens);
+        }
+
+        private void OnBeforeRun(List<Code> codes)
+        {
+            BeforeRun?.Invoke(this, codes);
+        }
+
+        private void OnCommentDetected(object sender, CommentEventArgs e)
+        {
+            CommentDetected?.Invoke(this, e);
+        }
     }
 }

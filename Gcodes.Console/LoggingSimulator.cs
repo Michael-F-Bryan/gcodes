@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Gcodes.Console
 {
+    /// <summary>
+    /// An emulator which hooks into the various events provided by an 
+    /// <see cref="Emulator"/> and logs the event arguments.
+    /// </summary>
     public class LoggingEmulator : Emulator
     {
         ILogger logger;
@@ -16,36 +20,39 @@ namespace Gcodes.Console
         public LoggingEmulator()
         {
             logger = Log.ForContext<LoggingEmulator>();
+
+            OperationExecuted += LoggingEmulator_OperationExecuted;
+            StateChanged += LoggingEmulator_StateChanged;
+            CommentDetected += LoggingEmulator_CommentDetected;
+       }
+
+        private void LoggingEmulator_StateChanged(object sender, StateChangeEventArgs e)
+        {
+            logger.Debug("State changed to {@State} (t: {Time})", e.NewState, e.Time);
         }
 
-        public override void Visit(Gcode code)
+        private void LoggingEmulator_OperationExecuted(object sender, OperationExecutedEventArgs e)
         {
-            var info = SpanInfoFor(code.Span);
-            if (info == null)
+            if (e.Operation == null)
             {
-                logger.Debug("Executing a gcode, {@Code}", code);
+                logger.Debug("Ignoring {$Code}", e.Code);
             }
             else
             {
-                logger.Debug("Executing {@Code} at L{Line},C{Column} => {@Info}", code, info.Start.Line, info.Start.Column, info);
+                logger.Debug("Executing {@Code} with {@Operation}", e.Code, e.Operation);
             }
-
-            base.Visit(code);
         }
 
-        protected override void CommentDetected(CommentEventArgs e)
+        private void LoggingEmulator_CommentDetected(object sender, CommentEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(e.Comment))
+            var info = SpanInfoFor(e.Span);
+            if (info == null)
             {
-                var info = SpanInfoFor(e.Span);
-                if (info == null)
-                {
-                    logger.Debug("Comment: {Comment}", e.Comment);
-                }
-                else
-                {
-                    logger.Debug("Comment: \"{Comment}\" at L{Line},C{Column}", e.Comment, info.Start.Line, info.Start.Column, info);
-                }
+                logger.Debug("Comment: {Comment}", e.Comment);
+            }
+            else
+            {
+                logger.Debug("Comment: \"{Comment}\" at L{Line},C{Column}", e.Comment, info.Start.Line, info.Start.Column, info);
             }
         }
     }

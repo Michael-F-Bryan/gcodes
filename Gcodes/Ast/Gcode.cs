@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Gcodes.Ast
 {
@@ -56,6 +57,19 @@ namespace Gcodes.Ast
         public override void Accept(IGcodeVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("G{0}", Number);
+
+            foreach (var arg in Arguments)
+            {
+                sb.AppendFormat(" {0}{1}", arg.Kind, arg.Value);
+            }
+
+            return sb.ToString();
         }
 
         #region Equals
