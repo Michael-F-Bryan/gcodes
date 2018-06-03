@@ -22,13 +22,21 @@ namespace Gcodes
     public class Interpreter : IGcodeVisitor
     {
         private bool running = false;
+        private FileMap map;
 
         /// <summary>
-        /// Tokenize, parse, then execute a gcode program.
+        /// <para>
+        /// Tokenize, parse, then execute a gcode program. 
+        /// </para>
+        /// <para>
+        /// This will also populate an internal <see cref="FileMap"/>, giving
+        /// you access to line and span info.        
+        /// </para>
         /// </summary>
         /// <param name="src"></param>
         public void Run(string src)
         {
+            map = new FileMap(src);
             var lexer = new Lexer(src);
             lexer.CommentDetected += (s, e) => CommentDetected(e);
 
@@ -77,6 +85,33 @@ namespace Gcodes
         public void Halt()
         {
             running = false;
+        }
+
+        /// <summary>
+        /// If interpreting from source, get the <see cref="SpanInfo"/> for a
+        /// particular <see cref="Span"/>.
+        /// </summary>
+        /// <param name="span"></param>
+        /// <returns>
+        /// Span information, or <c>null</c> if not interpeting from source.
+        /// </returns>
+        protected SpanInfo SpanInfoFor(Span span)
+        {
+            return map?.SpanInfoFor(span);
+        }
+
+        /// <summary>
+        /// If interpreting from source, get the <see cref="Location"/> for a
+        /// particular byte index into the source text.
+        /// </summary>
+        /// <param name="byteIndex"></param>
+        /// <returns>
+        /// The corresponding <see cref="Location"/>, or <c>null</c> if not 
+        /// interpreting from source.
+        /// </returns>
+        protected Location LocationFor(int byteIndex)
+        {
+            return map?.LocationFor(byteIndex);
         }
 
         public virtual void Visit(Gcode code) { }
