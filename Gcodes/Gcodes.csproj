@@ -49,7 +49,9 @@
     <Compile Include="Ast\Mcode.cs" />
     <Compile Include="Ast\Ocode.cs" />
     <Compile Include="Ast\Tcode.cs" />
+    <Compile Include="FileMap.cs" />
     <Compile Include="Interpreter.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Runtime\Emulator.cs" />
     <Compile Include="Runtime\IOperation.cs" />
     <Compile Include="Runtime\MachineState.cs" />

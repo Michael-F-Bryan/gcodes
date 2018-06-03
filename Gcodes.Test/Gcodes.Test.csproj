@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmbeddedFixture.cs" />
+    <Compile Include="FileMapTest.cs" />
     <Compile Include="LexerTest.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="PatternTest.cs" />
