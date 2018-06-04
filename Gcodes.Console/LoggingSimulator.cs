@@ -1,11 +1,5 @@
-﻿using Gcodes.Ast;
-using Gcodes.Runtime;
+﻿using Gcodes.Runtime;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gcodes.Console
 {
@@ -24,7 +18,7 @@ namespace Gcodes.Console
             OperationExecuted += LoggingEmulator_OperationExecuted;
             StateChanged += LoggingEmulator_StateChanged;
             CommentDetected += LoggingEmulator_CommentDetected;
-       }
+        }
 
         private void LoggingEmulator_StateChanged(object sender, StateChangeEventArgs e)
         {
@@ -33,7 +27,7 @@ namespace Gcodes.Console
 
         private void LoggingEmulator_OperationExecuted(object sender, OperationExecutedEventArgs e)
         {
-            if (e.Operation == null)
+            if (e.Operation is Noop nop && nop.Duration.TotalMilliseconds == 0.0)
             {
                 logger.Debug("Ignoring {$Code}", e.Code);
             }

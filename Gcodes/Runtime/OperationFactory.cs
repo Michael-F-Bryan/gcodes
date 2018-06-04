@@ -14,8 +14,7 @@ namespace Gcodes.Runtime
 
         /// <summary>
         /// Get the <see cref="IOperation"/> corresponding to a particular
-        /// <see cref="Gcode"/>. Returns <c>null</c> if the <see cref="Gcode"/>
-        /// should be ignored.
+        /// <see cref="Gcode"/>. 
         /// </summary>
         /// <param name="code"></param>
         /// <param name="initialState"></param>
@@ -26,13 +25,11 @@ namespace Gcodes.Runtime
 
             if (ignoredGcodes.Contains(code.Number))
             {
-                return null;
+                return new Noop(initialState);
             }
 
             switch (code.Number)
             {
-                case 17:
-                    return new Noop(initialState);
                 case 4:
                     var ms = code.ValueFor(ArgumentKind.P);
                     if (ms == null)

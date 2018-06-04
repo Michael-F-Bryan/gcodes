@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Gcodes.Ast;
 
 namespace Gcodes.Runtime
@@ -12,15 +9,19 @@ namespace Gcodes.Runtime
         private MachineState state;
         private double time;
         public OperationFactory Operations { get; set; } = new OperationFactory();
+        public MachineState InitialState { get; set; }
 
         public event EventHandler<StateChangeEventArgs> StateChanged;
         public event EventHandler<OperationExecutedEventArgs> OperationExecuted;
 
-        public Emulator() : this(new MachineState()) { }
-        public Emulator(MachineState InitialState)
+        public Emulator()
         {
-            State = InitialState;
-            time = 0;
+            BeforeRun += Reset;
+        }
+
+        private void Reset(object sender, List<Code> args)
+        {
+            UpdateState(0.0, InitialState);
         }
 
         public MachineState State
@@ -49,11 +50,7 @@ namespace Gcodes.Runtime
         {
             var operation = Operations.GcodeOp(code, State);
 
-            if (operation != null)
-            {
-                ExecuteOperation(operation);
-            }
-
+            ExecuteOperation(operation);
             OnOperationExecuted(operation, code);
         }
 

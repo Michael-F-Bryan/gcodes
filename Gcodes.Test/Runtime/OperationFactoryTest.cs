@@ -15,15 +15,15 @@ namespace Gcodes.Test.Runtime
         OperationFactory operations = new OperationFactory();
         MachineState initialState = new MachineState();
 
-        [Theory]
-        [InlineData(17)]
-        public void GetNoopInstructions(int number)
+        [Fact]
+        public void GetIgnoredInstruction()
         {
-            var shouldBe = new Noop(initialState);
+            const int number = 1;
+            operations.IgnoreGcode(number);
 
             var got = operations.GcodeOp(new Gcode(number, new List<Argument>(), Span.Empty), initialState);
 
-            Assert.Equal(shouldBe, got);
+            Assert.IsType<Noop>(got);
         }
 
         [Fact]
