@@ -67,7 +67,9 @@
     <Compile Include="TokenKindTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fixtures\371373P.gcode" />
+    <EmbeddedResource Include="Fixtures\371373P.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -80,10 +82,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fixtures\simple_mill.txt" />
+    <EmbeddedResource Include="Fixtures\simple_mill.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fixtures\circle.txt" />
+    <EmbeddedResource Include="Fixtures\circle.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

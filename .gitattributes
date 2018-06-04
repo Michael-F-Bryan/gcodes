@@ -62,4 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-Gcodes.Test/Fixtures eol=crlf
+*.gcode eol=crlf

@@ -23,7 +23,7 @@ namespace Gcodes.Test
         [InlineData(75, 3, 6, '2')]
         public void YouCanLookUpLocationDetails(int index, int line, int column, char sanityCheck)
         {
-            var src = EmbeddedFixture.ExtractFile("circle.txt");
+            var src = EmbeddedFixture.ExtractFile("circle.gcode");
             Assert.Equal(sanityCheck, src[index]);
             var map = new FileMap(src);
             var shouldBe = new Location(index, line, column);

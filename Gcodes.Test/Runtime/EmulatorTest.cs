@@ -17,8 +17,8 @@ namespace Gcodes.Test.Runtime
         }
 
         [Theory(Skip = "Not all operations are implemented")]
-        [InlineData("circle.txt")]
-        [InlineData("simple_mill.txt")]
+        [InlineData("circle.gcode")]
+        [InlineData("simple_mill.gcode")]
         [InlineData("371373P.gcode")]
         public void EmulateAValidGcodeProgram(string filename)
         {
