@@ -162,7 +162,7 @@ namespace Gcodes
             var valueTok = Chomp(TokenKind.Number) ?? throw ParseError(TokenKind.Number);
 
             var span = kindTok.Span.Merge(valueTok.Span);
-            var value = double.Parse(valueTok.Value);
+            var value = double.Parse(valueTok.Value, CultureInfo.InvariantCulture);
             var kind = kindTok.Kind.AsArgumentKind();
 
             return new Argument(kind, value, span);
